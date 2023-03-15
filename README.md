@@ -3,6 +3,7 @@ I hope you guys are able to learn off me making MewHub open-source and no longer
 
 I no longer really will touch this project.
 
+if u want coding help, feel free to ask in .gg/mewhub
 
 ## Loadstring
 ```lua
