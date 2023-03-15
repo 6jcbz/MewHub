@@ -1413,7 +1413,7 @@ local LibraryFunctions = Window:CreateTab('UI Config', false, 'rbxassetid://1208
 local UIFunctions = LibraryFunctions:CreateSection('UI Functions')
  
 local UiButton = UIFunctions:CreateButton('Load old MewHub', function()  
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Y5money/1/main/old", true))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/bigbootylatinas/MewHub/main/v2", true))()
 end)
 
 local DestroyButton = UIFunctions:CreateButton('Destroy UI', function()
