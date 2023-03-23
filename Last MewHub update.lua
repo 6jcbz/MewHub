@@ -1,8 +1,8 @@
 --[[--]] -- Fart Variables
 
 
---getgenv().WishList = {"Weedle"} 
---getgenv().Webhook = "your webhook here"
+getgenv().WishList = {"Weedle"} 
+getgenv().Webhook = "your webhook here"
 
 
 --[[--]] -- Global Variables
@@ -10,20 +10,14 @@ getgenv().AutoFinder = true
 getgenv().GetVariations = false
 getgenv().GetShiny = false
 getgenv().NoClip = false
-getgenv().AutoFinderDelay = 3
+getgenv().AutoFinderDelay = 0
 getgenv().WebHookNotify = false
 getgenv().InfRepel = false
 getgenv().FishingMode = false 
 getgenv().Rod = "GoodRod"
 
-getgenv().Test = "nil"
-getgenv().TestShiny = "nil"
-
---[[--]] -- FPS Variables
-_G.LowFPS = false --// Makes the FPS low (Recommened ON)
-_G.GPUSave = false --// Toggles the GPU/CPU Saver
-_G.SmoothForEyes = false --// ! UI ! Makes it Dark Mode
---[[--]] 
+getgenv().Test = "nil" -- for webhook pokemon
+getgenv().TestShiny = "nil" -- for webhook
 
 --[[--]] -- Anti afk + rejoin
 local VirtualUser = game:service'VirtualUser'
@@ -41,76 +35,6 @@ end)
 
 
 --[[--]] -- PBB Variables
-local localPlayer = game:GetService("Players").LocalPlayer
-local item1 = "pokeball"
-local qy = 1
-local _p = nil
-for _, v in pairs(getgc(true)) do
-    if typeof(v) == "table" then
-        if rawget(v, "PlayerData") then
-            _p = v
-            break
-        end
-    end
-end
-
-local plr = game:GetService("Players").LocalPlayer
-local cclosure = syn_newcclosure or newcclosure or nil
-if not cclosure or not hookmetamethod then
-    plr:Kick("\nUnsupported Exploit")
-end
-
-local forcebattle = function(player)
-    _p.Network:post("BattleRequest",player,{accepted = true})
-end;
-
-local forcetrade = function(player)
-    _p.Network:post("TradeRequest",player,{accepted = true})
-end;
-
-local chunkrev = function(obj)
-    spawn(function()
-            _p.Network:get("DataRequest",{"ChunkReceived",obj})
-    end)
-end;
-
-local autowin = function(splayer)
-    local battle = _p.Battle.currentBattle
-    battle:send("forfeit", splayer)
-end;
-
-local spawnitem = function(itemid, q)
-    for i = 1, q do
-        _p.Network:get("PDS", "giveItem", itemid, 1, true)
-        _p.Network:get("PDS", "takeItem", 1)
-    end
-end;
-
-_p.Network:get("PDS", "giveItem", itemid, 1, true)
-local spawntix = function(q)
-    
-end;
-
-local changetitle = function(text, color)
-    _p.Network:post("UpdateTitle","Winner" .. text .. "Winner", color)
-end;
-
-local spoofbattlejoin = function(splayer)
-    _p.Battle.currentBattle:send("forfeit","join",splayer,"spoofed",{1})
-end;
-
-local beatgym = function(gym)
-    local index = {109, 112, 113, 98, 126, 147,154, 173}
-    local battle =
-    _p.Network:get("BattleFunction","new",{["expShare"] = false,["battleType"] = 1,["nnalp"] = false,["isDay"] = true,["chunkId"] = "chunk1",["regionId"] = "Route 1",["trainerId"] = index[gym] or 1})
-    _p.Network:post("BattleEvent", battle.battleId, "join", 1, ";)")
-    wait(1)
-    _p.Network:post("BattleEvent", battle.battleId, "forfeit", "p2")
-    _p.Network:post("BattleEvent", battle.battleId, "destroy")
-end
-
-
-
 local LocalPlayer = game:GetService("Players").LocalPlayer
 local oldIndex = nil
 oldIndex = hookmetamethod(game, "__index", newcclosure(function(...) 
@@ -277,53 +201,12 @@ self.Variation = string.len(self.Variation) == 0 and "No Variation" or self.Vari
  LabelShinyEncounters:UpdateLabel("Shiny Encounters 🐹: "..self.ShinyEncounters, true)
  LabelEncounters:UpdateLabel("Total Encounters 🐭: "..self.TotalEncounters, true)
 end
- 
+
 function AutoFinder:UpdateTest()
+    dogg = "weedle"
     getgenv().Test = self.PokemonName
     getgenv().TestShiny = tostring(self.isShiny)
     dogg = string.lower(Test)
-
-
-_G.LowFPS = false --// Makes the FPS low (Recommened ON)
-        _G.GPUSave = false --// Toggles the GPU/CPU Saver
-        _G.SmoothForEyes = false --// ! UI ! Makes it Dark Mode
-        local RunService = game:GetService("RunService")
-        local UserInputService = game:GetService("UserInputService")
-        
-        function savegpu(fps)
-        setfpscap(fps)
-        RunService:Set3dRenderingEnabled(false)
-        end
-        
-        function unsavegpu()
-        setfpscap(360)
-        RunService:Set3dRenderingEnabled(true)
-        end
-        
-        if _G.GPUSave then
-            if _G.LowFPS then
-                savegpu(10)
-            else
-                savegpu(60)
-            end
-        else
-            unsavegpu()
-        end
-        
-        while wait() do
-            if _G.SmoothForEyes and _G.GPUSave then
-                BG.Visible = true
-                ImageLabel.Rotation = ImageLabel.Rotation + 5
-            else
-                BG.Visible = false
-            end
-end
-
-
-
-
-
-
 
     --//Player Variables
 local Player = Players.LocalPlayer
@@ -418,20 +301,20 @@ headshot = b
 local WebHookLink, NewData, ExploitRequest, FinalData = getgenv().WebHook, nil, nil, nil
 local ReportData = {
     ["content"] = "||@everyone||",
-        ["username"] = " 📊 Pσƙҽɱσɳ BɾιƈƙႦɾσɳȥҽ Sƚαƚʂ            ",
+        ["username"] = " 📊 Pσƙҽɱσɳ BɾιƈƙႦɾσɳȥҽ Sƚαƚʂ ᵐᵉʷʰᵘᵇ            ",
         --["avatar_url"] = "https://play.pokemonshowdown.com/sprites/xyani/".."weedle"..".gif",
         ["avatar_url"] = headshot,
     ["embeds"]= {
         {            
-            ["title"]= " 👤💫 **You found a pokemon!**";
-            ["url"]= "https://www.roblox.com/users/"..game.Players.LocalPlayer.UserId;
-            ["description"]= " 🎮 **Currently Playing **".."["..GameName.."](https://www.roblox.com/games/"..game.PlaceId..")";
+            ["title"]= " 👤💫 **ʏᴏᴜ ꜰᴏᴜɴᴅ ᴀ ᴘᴏᴋᴇᴍᴏɴ!** ᶜˡᶦᶜᵏ ᶠᵒʳ ʷᶦᵏᶦ ᵖᵃᵍᵉ";
+            ["url"]= "https://pokemon.fandom.com/wiki/"..dogg;
+            ["description"]= " 🎮 **ᴄᴜʀʀᴇɴᴛʟʏ ᴘʟᴀʏɪɴɢ **".."["..GameName.."](https://www.roblox.com/games/"..game.PlaceId..")";
             ["color"]= tonumber(0xffc0cb);
             ["thumbnail"] = {
                 ['url'] = "https://play.pokemonshowdown.com/sprites/xyani/"..dogg..".gif"
             }, 
             ["image"] = {
-            ["url"] = "https://media.discordapp.net/attachments/981248463633272912/996860301775482920/6AA53CEA-61E1-409F-A2AA-EB6572A99C0B.gif",
+            ["url"] = "https://media.discordapp.net/attachments/1045266138386403388/1084837866389131355/cozy.gif",
             --["url"] = headshot,
             
         },
@@ -439,74 +322,74 @@ local ReportData = {
             ["fields"]= {
 
                 {
-                    ["name"]= " 🏞️ Gamemode",
+                    ["name"]= " 🏞️ ɢᴀᴍᴇ ᴍᴏᴅᴇ",
                     ["value"]= "```".._p.gamemode.."```",
                     ["inline"]= true
                 },
                 
                 {
-                    ["name"]= " 🫡 Player",
+                    ["name"]= " 🫡 ᴘʟᴀʏᴇʀ",
                     ["value"]= "```"..game.Players.LocalPlayer.DisplayName.."```",
                     ["inline"]= true
                 },
 
                 {
-                    ["name"]= " 🌎 Chunk",
+                    ["name"]= " 🌎 ᴄʜᴜɴᴋ",
                     ["value"]= "```"..chunk.."```",
                     ["inline"]= true
                 },
             
                 {
-                    ["name"]= " 💵 Pokedollars",
+                    ["name"]= " 💵 ᴘᴏᴋᴇᴅᴏʟʟᴀʀꜱ",
                     ["value"]= "```".._p.PlayerData.money.."```",
                     ["inline"]= true
                 },
 
                 {
-                    ["name"]= " 🎫 Tickets",
+                    ["name"]= " 🎫 ᴛɪᴄᴋᴇᴛꜱ",
                     ["value"]= "```"..tix.."```",
                     ["inline"]= true
                 },
 
                 {
-                    ["name"]= " 🏟️ BP",
+                    ["name"]= " 🏟️ ʙᴘ",
                     ["value"]= "```".._p.PlayerData.bp.."```",
                     ["inline"]= true
                 },
 
                 {
-                    ["name"]= " 🎖️ Badges",
+                    ["name"]= " 🎖️ ʙᴀᴅɢᴇꜱ",
                     ["value"]= "```"..badges.."```",
                     ["inline"]= true
                 },
 
                 {
-                    ["name"]= " 🥚 Egg ready",
-                    ["value"]= "```".. egg .."```",
+                    ["name"]= " 🧬 ᴀʙɪʟɪᴛʏ ",
+                    ["value"]= "```".. self.HiddenAbility .."```",
                     ["inline"]= true
                 },
 
                 {
-                    ["name"]= " 🥷🏻 Repel",
+                    ["name"]= " 🥷🏻 ʀᴇᴘᴇʟ",
                     ["value"]= "```".. _p.Repel.steps .."```",
                     ["inline"]= true
                 },
                 
                 {
-                    ["name"]= " Pokemon Encountered",
+                    ["name"]= " <:Mew:1077026064389386301> Pokemon Encountered",
                     ["value"]= "```".. dogg .."```",
                     ["inline"]= true
                 },
 
                 {
-                    ["name"]= " Shiny",
+                    ["name"]= " 🐹 ꜱʜɪɴʏ",
                     ["value"]= "```".. TestShiny .."```",
                     ["inline"]= true
                 },
 
                 {
-                    ["name"]= " N/A",
-                    ["value"]= "```".. "N/A" .."```",
+                    ["name"]= " 🐭 ʀᴜɴꜱ",
+                    ["value"]= "```".. self.TotalEncounters .."```",
                     ["inline"]= true
                 },
             }              
@@ -769,25 +652,36 @@ game:GetService("RunService").Stepped:Connect(function()
     end
 end)
  
---AUTO FINDER
+--AUTO FINDER UI STARTS
 
 
 local Library = loadstring(game:HttpGet('https://raw.githubusercontent.com/VisualRoblox/Roblox/main/UI-Libraries/Visual%20UI%20Library/Source.lua'))()
-local Window = Library:CreateWindow('🎱 MewHub', "8M#0001", 'Loading | MewHub', 'rbxassetid://12085151652', false, 'VisualUIConfigs', 'Discord')
-local Tab = Window:CreateTab('Auto Finder', true, 'rbxassetid://12085151652', Vector2.new(524, 44), Vector2.new(36, 36))
+
+local Window = Library:CreateWindow('🎱 MewHub', "dev test", 'Loading | MewHub', 'rbxassetid://10110319522', false, 'VisualUIConfigs', 'Kiriot')
+
+
+
+local Tab = Window:CreateTab('Auto Finder', true, 'rbxassetid://10110319522', Vector2.new(524, 44), Vector2.new(36, 36))
+
 local Section = Tab:CreateSection('Auto Finder [Beta]')
+
 local Paragraph = Section:CreateParagraph('Reminder : ', 'before using autofinder, join a random wild battle then open your bag. Next, run from battle. This should make sure no autofinder bag-bugs, occur.')
-local Textbox = Section:CreateTextbox('Your Webhook🔗', 'Paste Here', function(Value)
+
+local Textbox = Section:CreateTextbox('Your Webhook 🔗', 'Paste Here', function(Value)
     Webhook = Value
 end)
-LabelSection= Section:CreateLabel('                 -｡ﾟ•┈✨┈•ﾟ｡-')
+
+local Textbox = Section:CreateTextbox('Your Wishlist 🐭', 'Input Here', function(Value)
+    getgenv().WishList = {Value} 
+end)
+LabelSection= Section:CreateLabel('                                  -｡ﾟ•┈✨┈•ﾟ｡-')
 local Toggle = Section:CreateToggle('Webhook-Notification 📣', false, Color3.fromRGB(0, 125, 255), 0.25, function(Value)
     WebHookNotify = Value
 end)
-local Button = Section:CreateButton('Send Test Notif', function()
+local Button = Section:CreateButton(' - Send Test Notif', function()
     AutoFinder:TestRequest()
 end)
-LabelSection= Section:CreateLabel('                 -｡ﾟ•┈✨┈•ﾟ｡-')
+LabelSection= Section:CreateLabel('                                  -｡ﾟ•┈✨┈•ﾟ｡-')
 local Toggle = Section:CreateToggle('Enable Auto Finder 🕵🏻', false, Color3.fromRGB(0, 125, 255), 0.25, function(Value)
 
     AutoFinderStatus = Value
@@ -801,10 +695,6 @@ local Toggle = Section:CreateToggle('Enable Auto Finder 🕵🏻', false, Color3
     end
 end)
  
-local FPSSlider = Section:CreateSlider('Frames Per Second 💻 (Reduce CPU Usage)', 1, 340, 144, Color3.fromRGB(0, 125, 255), function(Value)
-    setfpscap(Value)
-end)
- 
 local Toggle = Section:CreateToggle('Get Shiny 🌟', false, Color3.fromRGB(0, 125, 255), 0.25, function(Value)
     GetShiny = Value
 end)
@@ -812,7 +702,7 @@ end)
 local Toggle = Section:CreateToggle('Get Variations 🧬', false, Color3.fromRGB(0, 125, 255), 0.25, function(Value)
     GetVariations = Value
 end)
-LabelSection= Section:CreateLabel('                 -｡ﾟ•┈✨┈•ﾟ｡-') 
+LabelSection= Section:CreateLabel('                                  -｡ﾟ•┈✨┈•ﾟ｡-')
 local Toggle = Section:CreateToggle('Fishing Mode (Water needed) 🌊', false, Color3.fromRGB(0, 125, 255), 0.25, function(Value)
     FishingMode = Value
 end)
@@ -821,196 +711,21 @@ local Dropdown = Section:CreateDropdown('Fishing Rod 🎣', {'Old Rod', 'Good Ro
     Rod = Value == "Old Rod" and "OldRod" or Value == "Good Rod" and "GoodRod"
 end)
 
-local AutoFinderDelayTextbox;AutoFinderDelayTextBox = Section:CreateTextbox('Finder Delay ⏱️', '3.0', function(Value)
+local AutoFinderDelayTextbox;AutoFinderDelayTextBox = Section:CreateTextbox('Finder Delay ⏱️', '0.0', function(Value)
     if typeof(tonumber(Value)) ~= "number" then
         return
     end
     AutoFinderDelay = tonumber(Value)
 end)
 
-local Toggle = Section:CreateToggle('CPU/GPU screen 🖤', false, Color3.fromRGB(0, 125, 255), 0.25, function(Value)
-    if Value == true then
-        
-        _G.LowFPS = true --// Makes the FPS low (Recommened ON)
-        _G.GPUSave = true --// Toggles the GPU/CPU Saver
-        _G.SmoothForEyes = true --// ! UI ! Makes it Dark Mode
-local VirtualUser = game:service'VirtualUser'
-game:service'Players'.LocalPlayer.Idled:connect(function()
-    VirtualUser:CaptureController()
-    VirtualUser:ClickButton2(Vector2.new())
-end)
-
-game.Players.PlayerRemoving:connect(function(plr)
-   if plr == game.Players.LocalPlayer then
-     game:GetService('TeleportService'):Teleport(game.PlaceId)
-   end
-end)
-RunService:Set3dRenderingEnabled(false) -- cpu/gpu
-
-local sv = Instance.new("ScreenGui")
-local BG = Instance.new("Frame")
-local Some = Instance.new("Frame")
-local UICorner = Instance.new("UICorner")
-local TextLabel = Instance.new("TextLabel")
-local TextLabel_2 = Instance.new("TextLabel")
-local ImageLabel = Instance.new("ImageLabel")
-local TextLabel_3 = Instance.new("TextLabel")
-local SomeShadow = Instance.new("Frame")
-local UICorner_2 = Instance.new("UICorner")
-
---@preloadIMAGE
-ImageLabel.Image = "rbxassetid://12085151652"
-
-sv.Name = "sv"
-sv.Parent = game.CoreGui
-sv.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-
-BG.Name = "BG"
-BG.Parent = sv
-BG.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-BG.Position = UDim2.new(0, 0, -0.0502008051, 0)
-BG.Size = UDim2.new(1, 0, 1.10040164, 0)
-BG.Transparency = 1
-BG.Visible = true
-
-Some.Name = "Some"
-Some.Parent = BG
-Some.BackgroundColor3 = Color3.fromRGB(5, 5, 5)
-Some.Position = UDim2.new(0.030505348, 0, 0.10531909, 0)
-Some.Size = UDim2.new(0, 240, 0, 424)
-Some.Transparency = 0.6
-UICorner.Parent = Some
-
-TextLabel.Parent = Some
-TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TextLabel.BackgroundTransparency = 1.000
-TextLabel.Position = UDim2.new(0.0833333358, 0, 0.0424528308, 0)
-TextLabel.Size = UDim2.new(0, 200, 0, 50)
-TextLabel.Font = Enum.Font.GothamBold
-TextLabel.Text = "Saving GPU/CPU"
-TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-TextLabel.TextSize = 22.000
-TextLabel.TextWrapped = true
-
-TextLabel_2.Parent = Some
-TextLabel_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TextLabel_2.BackgroundTransparency = 1.000
-TextLabel_2.Position = UDim2.new(0.0833333358, 0, 0.120283008, 0)
-TextLabel_2.Size = UDim2.new(0, 200, 0, 59)
-TextLabel_2.Font = Enum.Font.Gotham
-TextLabel_2.Text = "How do you like MewHub? Please let us know in the discord!"
-TextLabel_2.TextColor3 = Color3.fromRGB(209, 209, 209)
-TextLabel_2.TextScaled = true
-TextLabel_2.TextSize = 14.000
-TextLabel_2.TextWrapped = true
-
-ImageLabel.Parent = Some
-ImageLabel.BackgroundColor3 = Color3.fromRGB(164, 163, 166)
-ImageLabel.BackgroundTransparency = 1.000
-ImageLabel.Position = UDim2.new(0, 31, 0, 129)
-ImageLabel.Size = UDim2.new(0, 178, 0, 178)
-ImageLabel.Image = "rbxassetid://12085151652"
-ImageLabel.ScaleType = Enum.ScaleType.Crop
-
-TextLabel_3.Parent = Some
-TextLabel_3.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TextLabel_3.BackgroundTransparency = 1.000
-TextLabel_3.Position = UDim2.new(0.0833333433, 0, 0.778301835, 0)
-TextLabel_3.Size = UDim2.new(0, 200, 0, 24)
-TextLabel_3.Font = Enum.Font.Unknown
-TextLabel_3.Text = ".gg/mewhub"
-TextLabel_3.TextColor3 = Color3.fromRGB(255, 255, 255)
-TextLabel_3.TextSize = 10.000
-TextLabel_3.TextWrapped = true
-
-SomeShadow.Name = "SomeShadow"
-SomeShadow.Parent = BG
-SomeShadow.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-SomeShadow.BackgroundTransparency = 0.250
-SomeShadow.Position = UDim2.new(0.0426830649, 0, 0.117689334, 0)
-SomeShadow.Size = UDim2.new(0, 240, 0, 424)
-SomeShadow.ZIndex = -1
-
-UICorner_2.Parent = SomeShadow
-
-local RunService = game:GetService("RunService")
-local UserInputService = game:GetService("UserInputService")
-
-function savegpu(fps)
-setfpscap(fps)
-RunService:Set3dRenderingEnabled(false)
-end
-
-function unsavegpu()
-setfpscap(360)
-RunService:Set3dRenderingEnabled(true)
-end
-
-if _G.GPUSave then
-    if _G.LowFPS then
-        savegpu(10)
-    else
-        savegpu(60)
-    end
-else
-    unsavegpu()
-end
-
-while wait() do
-    if _G.SmoothForEyes and _G.GPUSave then
-        BG.Visible = true
-        ImageLabel.Rotation = ImageLabel.Rotation + 5
-    else
-        BG.Visible = false
-    end
-end
-    elseif Value == false then
-        
-        _G.LowFPS = false --// Makes the FPS low (Recommened ON)
-        _G.GPUSave = false --// Toggles the GPU/CPU Saver
-        _G.SmoothForEyes = false --// ! UI ! Makes it Dark Mode
-        local RunService = game:GetService("RunService")
-        local UserInputService = game:GetService("UserInputService")
-        
-        function savegpu(fps)
-        setfpscap(fps)
-        RunService:Set3dRenderingEnabled(false)
-        end
-        
-        function unsavegpu()
-        setfpscap(360)
-        RunService:Set3dRenderingEnabled(true)
-        end
-        
-        if _G.GPUSave then
-            if _G.LowFPS then
-                savegpu(10)
-            else
-                savegpu(60)
-            end
-        else
-            unsavegpu()
-        end
-        
-        while wait() do
-            if _G.SmoothForEyes and _G.GPUSave then
-                BG.Visible = true
-                ImageLabel.Rotation = ImageLabel.Rotation + 5
-            else
-                BG.Visible = false
-            end
-end
-end
-end)
-
-LabelSection= Section:CreateLabel('                 -｡ﾟ•┈✨┈•ﾟ｡-')
+LabelSection= Section:CreateLabel('                                  -｡ﾟ•┈✨┈•ﾟ｡-')
 
  LabelAutoFinderStatus= Section:CreateLabel('Auto Finder ✅: N/A')
  LabelPokemonName = Section:CreateLabel('Last Found 🔎: N/A')
- LabelPokemonVariation = Section:CreateLabel('Variation 🧬: N/A')
  LabelPokemonisShiny = Section:CreateLabel('is Shiny 🌟: N/A')
- LabelPokemonCaptureRate = Section:CreateLabel('Capture Rate 👣: N/A')
+ LabelPokemonVariation = Section:CreateLabel('Variation 🧬: N/A')
  LabelPokemonHiddenAbility = Section:CreateLabel('Ability 🧠: N/A')
+ LabelPokemonCaptureRate = Section:CreateLabel('Capture Rate 👣: N/A')
  LabelEncounters = Section:CreateLabel('Total Encounters 🐭: N/A')
  LabelShinyEncounters = Section:CreateLabel('Total Shiny Encounters 🐹: N/A')
  
@@ -1164,74 +879,15 @@ local Toggle = Section:CreateToggle('Toggle Repel 🏃🐶', false, Color3.fromR
     end
 end)
 
--- daycare
-local MiscTab = Window:CreateTab('Daycare', true, 'rbxassetid://12085151652', Vector2.new(524, 44), Vector2.new(36, 36))
 
-local Section = MiscTab:CreateSection('Daycare Features')
-
-local Button = Section:CreateButton('take egg 🥚', function()
-    local _p = nil
-for _, v in pairs(getgc(true)) do
-    if typeof(v) == "table" then
-        if rawget(v, "PlayerData") then
-            _p = v
-            break
-        end
-    end
-end
-_p.PlayerData:takeEgg()
-    
-_p.Menu:enable()
-_p.MasterControl.WalkEnabled = true
-end)
-
-local Dropdown = Section:CreateDropdown('Leave Pokemon at Daycare 👵', {'1', '2', '3', '4', '5', '6'}, nil, 0.25, function(Value)
-    local _p = nil
-    for _, v in pairs(getgc(true)) do
-        if typeof(v) == "table" then
-            if rawget(v, "PlayerData") then
-                _p = v
-                break
-            end
-        end
-    end
-
-    _p.Network:get("PDS", "leaveDCPokemon", Value)
-end)
-
-local Button = Section:CreateButton('Take Daycare Pokemon 👶', function()
-    local _p = nil
-for _, v in pairs(getgc(true)) do
-    if typeof(v) == "table" then
-        if rawget(v, "PlayerData") then
-            _p = v
-            break
-        end
-    end
-end
-_p.Network:get("PDS", "takeDCPokemon", 1)
-wait(1)
-_p.Network:get("PDS", "takeDCPokemon", 1)
-end)
-
-local Button = Section:CreateButton('Hoverboard Spin [M - Toggle] 🥚', function()
-    local uis = game:GetService("UserInputService")
-    local vim = game:GetService("VirtualInputManager")
-    local bind = Enum.KeyCode.M
-    uis.InputBegan:connect(
-        function(key)
-            if key.KeyCode == bind then
-                vim:SendKeyEvent(true, "W", false, nil)
-                vim:SendKeyEvent(true, "A", false, nil)
-            end
-        end
-    )
-end)
- 
 
 local MiscTab = Window:CreateTab('Misc', true, 'rbxassetid://12085151652', Vector2.new(524, 44), Vector2.new(36, 36))
 
 local Section = MiscTab:CreateSection('Misc Features')
+
+local FPSSlider = Section:CreateSlider('Frames Per Second 💻 (Reduce CPU Usage)', 1, 340, 144, Color3.fromRGB(0, 125, 255), function(Value)
+    setfpscap(Value)
+end)
 
 local Button = Section:CreateButton('Material Remover 🙅‍♂️🏗️', function()
     _G.Settings = {
@@ -1291,119 +947,6 @@ end)
 local Button = Section:CreateButton('Server Browser 🖥️🗃️', function()
     loadstring(game:HttpGet("https://www.scriptblox.com/raw/Server-Browser_80", true))()
 end)
--- Shops
-
-local MiscTab = Window:CreateTab('Shops', true, 'rbxassetid://12085151652', Vector2.new(524, 44), Vector2.new(36, 36))
-
-local Section = MiscTab:CreateSection('Shop Features')
-
-local Button = Section:CreateButton('Pokemart 🏪', function()
-    local _p = nil
-    for _, v in pairs(getgc(true)) do
-        if typeof(v) == "table" then
-            if rawget(v, "PlayerData") then
-                _p = v
-                break
-            end
-        end
-    end
-    _p.Menu.shop:open()
-    _p.Menu:enable()
-    _p.MasterControl.WalkEnabled = true
-end)
-
-local Button = Section:CreateButton('BP Shop 🏬', function()
-    local _p = nil
-    for _, v in pairs(getgc(true)) do
-        if typeof(v) == "table" then
-            if rawget(v, "PlayerData") then
-                _p = v
-                break
-            end
-        end
-    end
-    _p.Menu.battleShop:open()
-    _p.Menu:enable()
-    _p.MasterControl.WalkEnabled = true
-end)
-
-local Button = Section:CreateButton('Stoneshop 💎', function()
-    local _p = nil
-    for _, v in pairs(getgc(true)) do
-        if typeof(v) == "table" then
-            if rawget(v, "PlayerData") then
-                _p = v
-                break
-            end
-        end
-    end
-    _p.Menu.shop:open("stnshp")
-    _p.Menu:enable()
-    _p.MasterControl.WalkEnabled = true
-end)
-
-local Button = Section:CreateButton('Arcade Shop 🎫', function()
-    local _p = nil
-        for _, v in pairs(getgc(true)) do
-            if typeof(v) == "table" then
-                if rawget(v, "PlayerData") then
-                    _p = v
-                    break
-                end
-            end
-        end
-        _p.Menu.ArcadeShop:open()
-        _p.Menu:enable()
-            _p.MasterControl.WalkEnabled = true
-end)
-
-local Button = Section:CreateButton('Buy Sushi (gives berries + prism scales) 🍣', function()
-    local _p = nil
-    for _, v in pairs(getgc(true)) do
-        if typeof(v) == "table" then
-            if rawget(v, "PlayerData") then
-                _p = v
-                break
-            end
-        end
-    end
-    _p.Network:get("PDS", "buySushi") -- = PlayerData:buySushi() ?
-end)
-
--- Chunk Loader
-local MiscTab = Window:CreateTab('Chunk Ldr', true, 'rbxassetid://12085151652', Vector2.new(524, 44), Vector2.new(36, 36))
-
-local Section = MiscTab:CreateSection('Chunk Loader Features')
-
-local Textbox = Section:CreateTextbox('Chunk Loader 🌻', 'Input', function(id)
-    local _p = nil
-    for _, v in pairs(getgc(true)) do
-        if typeof(v) == "table" then
-            if rawget(v, "PlayerData") then
-                _p = v
-                break
-            end
-        end
-    end
-    _p.DataManager:loadChunk("chunk" .. id)
-    _p.Menu.options:getUnstuck(true)
-end)
-
-local Dropdown = Section:CreateDropdown('Pokemon City 🏥', {'1', '2', '3', '5', '9', '11', '25', '39', '46', '52', '54'}, nil, 0.25, function(Value)
-    local _p = nil
-    for _, v in pairs(getgc(true)) do
-        if typeof(v) == "table" then
-            if rawget(v, "PlayerData") then
-                _p = v
-                break
-            end
-        end
-    end
-
-    _p.DataManager:loadChunk("chunk" .. v)
-    _p.Menu.options:getUnstuck(true)
-
-end)
 
 
 
@@ -1420,7 +963,7 @@ local DestroyButton = UIFunctions:CreateButton('Destroy UI', function()
     Library:DestroyUI()
 end)
  
-local ToggleKeybind = UIFunctions:CreateKeybind('Toggle UI', 'Left-Alt', function()
+local ToggleKeybind = UIFunctions:CreateKeybind('Toggle UI', 'LeftAlt', function()
     Library:ToggleUI()
 end)
  
@@ -1475,11 +1018,10 @@ for Index, CurrentColor in next, Library:ReturnTheme() do
 end
 --CREDITS
 local Tab = Window:CreateTab('', true, '', Vector2.new(524, 44), Vector2.new(36, 36))
- 
-local Section = Tab:CreateSection('Credits')
- 
-local Label1 = Section:CreateLabel('.gg/Mewhub')
 
+local Section = Tab:CreateSection('Credits')
+ Library:SetTransparency(85 / 100, true)
+local Label1 = Section:CreateLabel('.gg/Mewhub')
 
 
 
