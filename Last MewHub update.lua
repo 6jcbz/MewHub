@@ -435,7 +435,7 @@ local ReportData = {
                 ['url'] = webhookdogg
             }, 
             ["image"] = {
-            ["url"] = "https://media.discordapp.net/attachments/1045266138386403388/1084837866389131355/cozy.gif",
+            ["url"] = "https://cdn.discordapp.com/attachments/1089249367829004388/1089257203896172675/9787.gif",
             --["url"] = headshot,
             
         },
