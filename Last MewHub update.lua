@@ -1,7 +1,7 @@
 --[[--]] -- Fart Variables
 
 
---getgenv().WishList = {"Weedle"} 
+--getgenv().WishList = {"Pidgey"} 
 --getgenv().Webhook = ""
 
 
@@ -210,6 +210,17 @@ function AutoFinder:UpdateTest()
     getgenv().TestShiny = tostring(self.isShiny)
     dogg = string.lower(Test)
     
+
+    normal = "https://play.pokemonshowdown.com/sprites/xyani/"..dogg..".gif"
+    shinee = "https://play.pokemonshowdown.com/sprites/ani-shiny/"..dogg..".gif"
+
+
+    if(self.isShiny) then do
+    webhookdogg = shinee
+    end
+    else
+    webhookdogg = normal   
+    end
     --//Player Variables
 local Player = Players.LocalPlayer
 local Character = Player.Character or Player.CharacterAdded:Wait()
@@ -299,6 +310,7 @@ headshot = b
 --[[--]]
 
 
+
 --//WebHook Variables
 local WebHookLink, NewData, ExploitRequest, FinalData = getgenv().Webhook, nil, nil, nil
 local ReportData = {
@@ -313,7 +325,7 @@ local ReportData = {
             ["description"]= " 🎮 **ᴄᴜʀʀᴇɴᴛʟʏ ᴘʟᴀʏɪɴɢ **".."["..GameName.."](https://www.roblox.com/games/"..game.PlaceId..")";
             ["color"]= tonumber(0xffc0cb);
             ["thumbnail"] = {
-                ['url'] = "https://play.pokemonshowdown.com/sprites/xyani/"..dogg..".gif"
+                ['url'] = webhookdogg
             }, 
             ["image"] = {
             ["url"] = "https://media.discordapp.net/attachments/1045266138386403388/1084837866389131355/cozy.gif",
