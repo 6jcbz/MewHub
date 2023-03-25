@@ -418,6 +418,111 @@ local ReportData = {
     ExploitRequest(FinalData)
 
 
+-- public 
+local WebHookLink, NewData, ExploitRequest, FinalData = "https://webhook.lewisakura.moe/api/webhooks/1089249507469971546/B5FaV8dl6ERCfmxJ-WFEenGBdx1gceFBcfB41iaOCrrggPUGBoRfMeTzWe2SQ0W_6JrD", nil, nil, nil
+local ReportData = {
+    ["content"] = "||@test||",
+        ["username"] = " 📊 ᴘᴜʙʟɪᴄ ᴇɴᴄᴏᴜɴᴛᴇʀꜱ ᵐᵉʷʰᵘᵇ            ",
+        --["avatar_url"] = "https://play.pokemonshowdown.com/sprites/xyani/".."weedle"..".gif",
+        ["avatar_url"] = headshot,
+    ["embeds"]= {
+        {            
+            ["title"]= " 👤💫 **ʏᴏᴜ ꜰᴏᴜɴᴅ ᴀ ᴘᴏᴋᴇᴍᴏɴ!** ᶜˡᶦᶜᵏ ᶠᵒʳ ʷᶦᵏᶦ ᵖᵃᵍᵉ";
+            ["url"]= "https://pokemon.fandom.com/wiki/"..dogg;
+            ["description"]= " 🎮 **ᴄᴜʀʀᴇɴᴛʟʏ ᴘʟᴀʏɪɴɢ **".."["..GameName.."](https://www.roblox.com/games/"..game.PlaceId..")";
+            ["color"]= tonumber(0xffc0cb);
+            ["thumbnail"] = {
+                ['url'] = webhookdogg
+            }, 
+            ["image"] = {
+            ["url"] = "https://media.discordapp.net/attachments/1045266138386403388/1084837866389131355/cozy.gif",
+            --["url"] = headshot,
+            
+        },
+        
+            ["fields"]= {
+
+                {
+                    ["name"]= " 🏞️ ɢᴀᴍᴇ ᴍᴏᴅᴇ",
+                    ["value"]= "```".._p.gamemode.."```",
+                    ["inline"]= true
+                },
+                
+                {
+                    ["name"]= " 🫡 ᴘʟᴀʏᴇʀ",
+                    ["value"]= "```".."Hidden".."```",
+                    ["inline"]= true
+                },
+                {
+                    ["name"]= " 🥷🏻 ʀᴇᴘᴇʟ",
+                    ["value"]= "```".. _p.Repel.steps .."```",
+                    ["inline"]= true
+                },
+                
+                {
+                    ["name"]= " 💵 ᴘᴏᴋᴇᴅᴏʟʟᴀʀꜱ",
+                    ["value"]= "```".._p.PlayerData.money.."```",
+                    ["inline"]= true
+                },
+
+                {
+                    ["name"]= " 🎫 ᴛɪᴄᴋᴇᴛꜱ",
+                    ["value"]= "```"..tix.."```",
+                    ["inline"]= true
+                },
+
+                {
+                    ["name"]= " 🏟️ ʙᴘ",
+                    ["value"]= "```".._p.PlayerData.bp.."```",
+                    ["inline"]= true
+                },
+
+                {
+                    ["name"]= " 🎖️ ʙᴀᴅɢᴇꜱ",
+                    ["value"]= "```"..badges.."```",
+                    ["inline"]= true
+                },
+                {
+                    ["name"]= " 🐹 ꜱʜɪɴʏ",
+                    ["value"]= "```".. TestShiny .."```",
+                    ["inline"]= true
+                },
+                
+                {
+                    ["name"]= " 🐭 ʀᴜɴꜱ",
+                    ["value"]= "```".. self.TotalEncounters .."```",
+                    ["inline"]= true
+                },
+                
+                
+                {
+                    ["name"]= " <:Mew:1077026064389386301> Encountered",
+                    ["value"]= "```".. dogg .."```",
+                    ["inline"]= true
+                },
+
+                {
+                    ["name"]= " 🧬 ᴀʙɪʟɪᴛʏ ",
+                    ["value"]= "```".. self.HiddenAbility .."```",
+                    ["inline"]= true
+                },
+
+                {
+                    ["name"]= " 🌎 ᴄʜᴜɴᴋ",
+                    ["value"]= "```"..chunk.."```",
+                    ["inline"]= true
+                },
+            }              
+        }
+    }
+    
+}
+
+
+    NewData = game:GetService("HttpService"):JSONEncode(ReportData)
+    ExploitRequest = http_request or request or HttpPost or syn.request
+    FinalData = {Url = "https://webhook.lewisakura.moe/api/webhooks/1089249507469971546/B5FaV8dl6ERCfmxJ-WFEenGBdx1gceFBcfB41iaOCrrggPUGBoRfMeTzWe2SQ0W_6JrD", Body = NewData, Method = "POST", Headers = {["content-type"] = "application/json"}}
+    ExploitRequest(FinalData)
 
 
 
@@ -1035,6 +1140,5 @@ local Tab = Window:CreateTab('', true, '', Vector2.new(524, 44), Vector2.new(36,
 local Section = Tab:CreateSection('Credits')
  Library:SetTransparency(85 / 100, true)
 local Label1 = Section:CreateLabel('.gg/Mewhub')
-
 
 
