@@ -2,7 +2,7 @@
 
 
 --getgenv().WishList = {"Pidgey"} 
---getgenv().Webhook = "your webhook here"
+--getgenv().Webhook = ""
 
 
 --[[--]] -- Global Variables
