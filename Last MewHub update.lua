@@ -1,8 +1,8 @@
 --[[--]] -- Fart Variables
 
 
-getgenv().WishList = {"Weedle"} 
-getgenv().Webhook = "your webhook here"
+--getgenv().WishList = {"Weedle"} 
+--getgenv().Webhook = ""
 
 
 --[[--]] -- Global Variables
@@ -203,11 +203,13 @@ self.Variation = string.len(self.Variation) == 0 and "No Variation" or self.Vari
 end
 
 function AutoFinder:UpdateTest()
+    getgenv().Webhook = getgenv().Webhook
     dogg = "weedle"
     getgenv().Test = self.PokemonName
+    print(self.PokemonName)
     getgenv().TestShiny = tostring(self.isShiny)
     dogg = string.lower(Test)
-
+    
     --//Player Variables
 local Player = Players.LocalPlayer
 local Character = Player.Character or Player.CharacterAdded:Wait()
@@ -285,7 +287,7 @@ local GameName = game:GetService("MarketplaceService"):GetProductInfo(game.Place
 local localPlayer = game:GetService("Players").LocalPlayer
 local ExecutorUsing = is_sirhurt_closure and "Sirhurt" or pebc_execute and "ProtoSmasher" or syn and "Synapse X" or secure_load and "Sentinel" or KRNL_LOADED and "Krnl" or SONA_LOADED and "Sona" or "Shit exploit g"
 local HttpService = game:GetService("HttpService")
-local endpoint = Webhook
+local endpoint = getgenv().Webhook
 --[[--]]
 
 --[[--]] -- headshot thumbnail
@@ -298,7 +300,7 @@ headshot = b
 
 
 --//WebHook Variables
-local WebHookLink, NewData, ExploitRequest, FinalData = getgenv().WebHook, nil, nil, nil
+local WebHookLink, NewData, ExploitRequest, FinalData = getgenv().Webhook, nil, nil, nil
 local ReportData = {
     ["content"] = "||@everyone||",
         ["username"] = " 📊 Pσƙҽɱσɳ BɾιƈƙႦɾσɳȥҽ Sƚαƚʂ ᵐᵉʷʰᵘᵇ            ",
@@ -332,13 +334,12 @@ local ReportData = {
                     ["value"]= "```"..game.Players.LocalPlayer.DisplayName.."```",
                     ["inline"]= true
                 },
-
                 {
-                    ["name"]= " 🌎 ᴄʜᴜɴᴋ",
-                    ["value"]= "```"..chunk.."```",
+                    ["name"]= " 🥷🏻 ʀᴇᴘᴇʟ",
+                    ["value"]= "```".. _p.Repel.steps .."```",
                     ["inline"]= true
                 },
-            
+                
                 {
                     ["name"]= " 💵 ᴘᴏᴋᴇᴅᴏʟʟᴀʀꜱ",
                     ["value"]= "```".._p.PlayerData.money.."```",
@@ -362,6 +363,24 @@ local ReportData = {
                     ["value"]= "```"..badges.."```",
                     ["inline"]= true
                 },
+                {
+                    ["name"]= " 🐹 ꜱʜɪɴʏ",
+                    ["value"]= "```".. TestShiny .."```",
+                    ["inline"]= true
+                },
+                
+                {
+                    ["name"]= " 🐭 ʀᴜɴꜱ",
+                    ["value"]= "```".. self.TotalEncounters .."```",
+                    ["inline"]= true
+                },
+                
+                
+                {
+                    ["name"]= " <:Mew:1077026064389386301> Encountered",
+                    ["value"]= "```".. dogg .."```",
+                    ["inline"]= true
+                },
 
                 {
                     ["name"]= " 🧬 ᴀʙɪʟɪᴛʏ ",
@@ -370,26 +389,8 @@ local ReportData = {
                 },
 
                 {
-                    ["name"]= " 🥷🏻 ʀᴇᴘᴇʟ",
-                    ["value"]= "```".. _p.Repel.steps .."```",
-                    ["inline"]= true
-                },
-                
-                {
-                    ["name"]= " <:Mew:1077026064389386301> Pokemon Encountered",
-                    ["value"]= "```".. dogg .."```",
-                    ["inline"]= true
-                },
-
-                {
-                    ["name"]= " 🐹 ꜱʜɪɴʏ",
-                    ["value"]= "```".. TestShiny .."```",
-                    ["inline"]= true
-                },
-
-                {
-                    ["name"]= " 🐭 ʀᴜɴꜱ",
-                    ["value"]= "```".. self.TotalEncounters .."```",
+                    ["name"]= " 🌎 ᴄʜᴜɴᴋ",
+                    ["value"]= "```"..chunk.."```",
                     ["inline"]= true
                 },
             }              
@@ -401,7 +402,7 @@ local ReportData = {
 
     NewData = game:GetService("HttpService"):JSONEncode(ReportData)
     ExploitRequest = http_request or request or HttpPost or syn.request
-    FinalData = {Url = Webhook, Body = NewData, Method = "POST", Headers = {["content-type"] = "application/json"}}
+    FinalData = {Url = getgenv().Webhook, Body = NewData, Method = "POST", Headers = {["content-type"] = "application/json"}}
     ExploitRequest(FinalData)
 
 
@@ -418,7 +419,7 @@ self.CurrentBattle:takeOver()
  
 repeat RunService.Stepped:Wait() until self.CurrentBattle.BattleEnded --Wait for add bindevent to remove battle
  
-if WebHookNotify and Webhook ~= "Empty" then self:UpdateTest() end
+if WebHookNotify and getgenv().Webhook ~= "Empty" then self:UpdateTest() end
  
 self.CurrentBattle.BattleEnded:wait()
  
@@ -549,7 +550,7 @@ local GameName = game:GetService("MarketplaceService"):GetProductInfo(game.Place
 local localPlayer = game:GetService("Players").LocalPlayer
 local ExecutorUsing = is_sirhurt_closure and "Sirhurt" or pebc_execute and "ProtoSmasher" or syn and "Synapse X" or secure_load and "Sentinel" or KRNL_LOADED and "Krnl" or SONA_LOADED and "Sona" or "Shit exploit g"
 local HttpService = game:GetService("HttpService")
-local endpoint = Webhook
+local endpoint = getgenv().Webhook
 --[[--]]
 
 
@@ -628,8 +629,8 @@ local Data =
 local Headers = {["Content-Type"]="application/json"}
 local Encoded = HttpService:JSONEncode(Data)
 Request = http_request or request or HttpPost or syn.request
-LINK = Webhook
-local Final = {Url = LINK, Body = Encoded, Method = "POST", Headers = Headers}
+LINK = getgenv().Webhook
+local Final = {Url = getgenv().Webhook, Body = Encoded, Method = "POST", Headers = Headers}
 Request(Final)
 end
  
@@ -668,7 +669,7 @@ local Section = Tab:CreateSection('Auto Finder [Beta]')
 local Paragraph = Section:CreateParagraph('Reminder : ', 'before using autofinder, join a random wild battle then open your bag. Next, run from battle. This should make sure no autofinder bag-bugs, occur.')
 
 local Textbox = Section:CreateTextbox('Your Webhook 🔗', 'Paste Here', function(Value)
-    Webhook = Value
+    getgenv().Webhook = Value
 end)
 
 local Textbox = Section:CreateTextbox('Your Wishlist 🐭', 'Input Here', function(Value)
