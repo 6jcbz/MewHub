@@ -271,18 +271,6 @@ local Players = game:GetService("Players")
 local Player = Players.LocalPlayer
 
 
-task.spawn(function()
-local OldNameCall 
-OldNameCall = hookmetamethod(game, "__namecall", function(...) 
-    local Self, Args = (...), ({select(2, ...)})
-    
-    if getnamecallmethod() == "Kick" and Self == Player then 
-        return wait(9e9)
-    end
-
-    return OldNameCall(...)
-end)
-end)
 
  
 local Disables = {
