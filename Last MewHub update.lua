@@ -271,6 +271,18 @@ local Players = game:GetService("Players")
 local Player = Players.LocalPlayer
 
 
+task.spawn(function()
+local OldNameCall 
+OldNameCall = hookmetamethod(game, "__namecall", function(...) 
+    local Self, Args = (...), ({select(2, ...)})
+    
+    if getnamecallmethod() == "Kick" and Self == Player then 
+        return wait(9e9)
+    end
+
+    return OldNameCall(...)
+end)
+end)
 
  
 local Disables = {
@@ -513,7 +525,7 @@ local ReportData = {
                 ['url'] = webhookdogg
             }, 
             ["image"] = {
-            ["url"] = "https://cdn.discordapp.com/attachments/503587967709741219/1089660851310559353/cozy.gif",
+            ["url"] = "https://media.discordapp.net/attachments/1045266138386403388/1084837866389131355/cozy.gif",
             --["url"] = headshot,
             
         },
@@ -1078,32 +1090,32 @@ if syn and syn.protect_gui then
     syn.protect_gui(game:GetService("CoreGui"))
     syn.protect_gui(game:GetService("StarterGui"))
 end
-local Window = Library:CreateWindow('🎱 MewHub', "dev test", 'Loading | MewHub', 'rbxassetid://10110319522', false, 'VisualUIConfigs', 'Kiriot')
+local Window = Library:CreateWindow('🎱 MewHub', "dev test", 'Loading | MewHub', 'rbxassetid://10110319522', false, 'VisualUIConfigs', 'Krnl')
 
 
 
-local Tab = Window:CreateTab('Auto Finder', true, 'rbxassetid://10110319522', Vector2.new(524, 44), Vector2.new(36, 36))
+local Tab = Window:CreateTab('Auto Finder', true, 'rbxassetid://10110319522')
 
 local Section = Tab:CreateSection('Auto Finder [Beta]')
 
 local Paragraph = Section:CreateParagraph('Reminder : ', 'before using autofinder, join a random wild battle then open your bag. Next, run from battle. This should make sure no autofinder bag-bugs, occur.')
 
-local Textbox = Section:CreateTextbox('Your Webhook 🔗', 'Paste Here', function(Value)
+local Textbox = Section:CreateTextbox('.Webhook 🔗', 'Paste Here', function(Value)
     getgenv().Webhook = Value
 end)
 
-local Textbox = Section:CreateTextbox('Your Wishlist 🐭', 'Input Here', function(Value)
+local Textbox = Section:CreateTextbox('.Wishlist 🐭', 'Input Here', function(Value)
     getgenv().WishList = {Value} 
 end)
 LabelSection= Section:CreateLabel('                                  -｡ﾟ•┈✨┈•ﾟ｡-')
-local Toggle = Section:CreateToggle('Webhook-Notification 📣', false, Color3.fromRGB(0, 125, 255), 0.25, function(Value)
+local Toggle = Section:CreateToggle('.Notifications 📣', false, Color3.fromRGB(0, 125, 255), 0.25, function(Value)
     WebHookNotify = Value
 end)
 local Button = Section:CreateButton(' - Send Test Notif', function()
     AutoFinder:TestRequest()
 end)
 LabelSection= Section:CreateLabel('                                  -｡ﾟ•┈✨┈•ﾟ｡-')
-local Toggle = Section:CreateToggle('Enable Auto Finder 🕵🏻', false, Color3.fromRGB(0, 125, 255), 0.25, function(Value)
+local Toggle = Section:CreateToggle('.AutoFinder 🕵🏻', false, Color3.fromRGB(0, 125, 255), 0.25, function(Value)
 
     AutoFinderStatus = Value
     if Value == true then 
@@ -1116,19 +1128,19 @@ local Toggle = Section:CreateToggle('Enable Auto Finder 🕵🏻', false, Color3
     end
 end)
  
-local Toggle = Section:CreateToggle('Get Shiny 🌟', false, Color3.fromRGB(0, 125, 255), 0.25, function(Value)
+local Toggle = Section:CreateToggle('.GetShiny 🌟', false, Color3.fromRGB(0, 125, 255), 0.25, function(Value)
     GetShiny = Value
 end)
  
-local Toggle = Section:CreateToggle('Get Variations 🧬', false, Color3.fromRGB(0, 125, 255), 0.25, function(Value)
+local Toggle = Section:CreateToggle('.GetVariations 🧬', false, Color3.fromRGB(0, 125, 255), 0.25, function(Value)
     GetVariations = Value
 end)
 LabelSection= Section:CreateLabel('                                  -｡ﾟ•┈✨┈•ﾟ｡-')
-local Toggle = Section:CreateToggle('Fishing Mode (Water needed) 🌊', false, Color3.fromRGB(0, 125, 255), 0.25, function(Value)
+local Toggle = Section:CreateToggle('.FishingMode (Water needed) 🌊', false, Color3.fromRGB(0, 125, 255), 0.25, function(Value)
     FishingMode = Value
 end)
  
-local Dropdown = Section:CreateDropdown('Fishing Rod 🎣', {'Old Rod', 'Good Rod'}, 'Good Rod', 0.25, function(Value)
+local Dropdown = Section:CreateDropdown('.FishingRod 🎣', {'Old Rod', 'Good Rod'}, 'Good Rod', 0.25, function(Value)
     Rod = Value == "Old Rod" and "OldRod" or Value == "Good Rod" and "GoodRod"
 end)
 
@@ -1141,22 +1153,225 @@ end)
 
 LabelSection= Section:CreateLabel('                                  -｡ﾟ•┈✨┈•ﾟ｡-')
 
- LabelAutoFinderStatus= Section:CreateLabel('Auto Finder ✅: N/A')
- LabelPokemonName = Section:CreateLabel('Last Found 🔎: N/A')
- LabelPokemonisShiny = Section:CreateLabel('is Shiny 🌟: N/A')
- LabelPokemonVariation = Section:CreateLabel('Variation 🧬: N/A')
- LabelPokemonHiddenAbility = Section:CreateLabel('Ability 🧠: N/A')
- LabelPokemonCaptureRate = Section:CreateLabel('Capture Rate 👣: N/A')
- LabelEncounters = Section:CreateLabel('Total Encounters 🐭: N/A')
- LabelShinyEncounters = Section:CreateLabel('Total Shiny Encounters 🐹: N/A')
+
+
+ LabelAutoFinderStatus= Section:CreateLabel('.AutoFinder ✅: N/A')
+ LabelPokemonName = Section:CreateLabel('.LastFound 🔎: N/A')
+ LabelPokemonisShiny = Section:CreateLabel('.isShiny 🌟: N/A')
+ LabelPokemonVariation = Section:CreateLabel('.Variation 🧬: N/A')
+ LabelPokemonHiddenAbility = Section:CreateLabel('.Ability 🧠: N/A')
+ LabelPokemonCaptureRate = Section:CreateLabel('.CaptureRate 👣: N/A')
+ LabelEncounters = Section:CreateLabel('.TotalEncounters 🐭: N/A')
+ LabelShinyEncounters = Section:CreateLabel('.ShinyEncounters 🐹: N/A')
+
+ -- Seller
+local MiscTab = Window:CreateTab('Seller', true, 'rbxassetid://12085151652')
+
+local Section = MiscTab:CreateSection('Seller Features')
+
+
+
+-- Player Table
+local playertc
+local playertab = {}
+for i, v in pairs(game:GetService("Players"):GetPlayers()) do
+    table.insert(playertab, v.Name)
+end
+
+
+
+
+local Image = Section:CreateImage(".PlayerImage 🖼️", "https://www.roblox.com/headshot-thumbnail/image?userId=".. game.Players.LocalPlayer.UserId .."&width=420&height=420&format=png", UDim2.new(0, 100, 0, 100))
+
+local Dropdown = Section:CreateDropdown('.User 🤵🏻', playertab, nil, 0.25, function(Value)
+
+
+playertc = Value
+
+-- Player Account Birthday
+
+local playerFart = game:GetService("Players")[playertc]
+local months = {
+	"Jan", "Feb", "Mar", "Apr",
+	"May", "Jun", "Jul", "Aug",
+	"Sep", "Oct", "Nov", "Dec"
+}
+local secondsExisted = playerFart.AccountAge * 86400
+local dateObject = os.date("!*t", os.time() - secondsExisted)
+local poopAge = ("👤 "..playerFart.Name .." joined ROBLOX -")
+local poopAge2 = ("📅 around "..months[dateObject.month].." "..dateObject.day..", "..dateObject.year)
+
+LabelPlayerAge:UpdateLabel(poopAge, true)
+LabelPlayerAge2:UpdateLabel(poopAge2, true)
+
+Image:UpdateImage("https://www.roblox.com/headshot-thumbnail/image?userId=".. game:GetService("Players")[playertc].UserId .."&width=420&height=420&format=png", UDim2.new(0, 100, 0, 100))
+end)
+
+
+LabelPlayerAge= Section:CreateLabel('.JoinDate 🚼')
+LabelPlayerAge2= Section:CreateLabel('.JoinDate 📆 ')
+
+
+LabelSection= Section:CreateLabel('                                  -｡ﾟ•┈✨┈•ﾟ｡-')
+
+
+
+
+
+local localPlayer = game:GetService("Players").LocalPlayer
+local _p = nil
+for _, v in pairs(getgc(true)) do
+    if typeof(v) == "table" then
+        if rawget(v, "PlayerData") then
+            _p = v
+            break
+        end
+    end
+end
+
+LabelPokedollars= Section:CreateLabel(".Pokedollars 💰 = $".._p.PlayerData.money)
+
+
+local Dropdown = Section:CreateDropdown('.BuyItems 🛍️ ', {"Pokemart 🏪","BP Shop 🏬", "Stoneshop 💎", "Arcade Shop 🎫"}, nil, 0.25, function(Value)
+
+local localPlayer = game:GetService("Players").LocalPlayer
+local _p = nil
+for _, v in pairs(getgc(true)) do
+    if typeof(v) == "table" then
+        if rawget(v, "PlayerData") then
+            _p = v
+            break
+        end
+    end
+end
+
+if(Value == "Pokemart 🏪")then
+_p.Menu.shop:open()
+_p.Menu:enable()
+_p.MasterControl.WalkEnabled = true   
+end
+
+if(Value == "BP Shop 🏬")then
+_p.Menu.battleShop:open()
+_p.Menu:enable()
+_p.MasterControl.WalkEnabled = true   
+end
+
+if(Value == "Stoneshop 💎")then
+_p.Menu.shop:open("stnshp")
+_p.Menu:enable()
+_p.MasterControl.WalkEnabled = true   
+end
+
+if(Value == "Arcade Shop 🎫")then
+_p.Menu.ArcadeShop:open()
+_p.Menu:enable()
+_p.MasterControl.WalkEnabled = true   
+end
+
+end)
+
+
+local Textbox = Section:CreateTextbox('.️GivePartyTypedItem ✉️🦌', "Item Name", function(Value)
+
+item = Value
+
+local localPlayer = game:GetService("Players").LocalPlayer
+local _p = nil
+for _, v in pairs(getgc(true)) do
+    if typeof(v) == "table" then
+        if rawget(v, "PlayerData") then
+            _p = v
+            break
+        end
+    end
+end
+
+ for i = 1, 6 do
+ partyslot = i   
  
+_p.Network:get("PDS", "giveItem",item,partyslot)
+_p.Menu:enable()
+_p.MasterControl.WalkEnabled = true 
+
+end
+
+
+
+
+end)
+
+local Dropdown = Section:CreateDropdown('.TakeItemsFrom 📨 💼️ ', {"Party[ALL]","Party[1]", "Party[2]", "Party[3]","Party[4]", "Party[5]", "Party[6]"}, nil, 0.25, function(Value)
+
+local localPlayer = game:GetService("Players").LocalPlayer
+local _p = nil
+for _, v in pairs(getgc(true)) do
+    if typeof(v) == "table" then
+        if rawget(v, "PlayerData") then
+            _p = v
+            break
+        end
+    end
+end
+
+if(Value == "Party[ALL]")then
+    
+ for i = 1, 6 do
+ partyslot = i   
  
+_p.Network:get("PDS", "takeItem",partyslot)
+_p.Menu:enable()
+_p.MasterControl.WalkEnabled = true   
+end
+end
+
+if(Value == "Party[1]")then
+_p.Network:get("PDS", "takeItem",1)
+_p.Menu:enable()
+_p.MasterControl.WalkEnabled = true   
+end
+
+if(Value == "Party[2]")then
+_p.Network:get("PDS", "takeItem",2)
+_p.Menu:enable()
+_p.MasterControl.WalkEnabled = true   
+end
+
+if(Value == "Party[3]")then
+_p.Network:get("PDS", "takeItem",3)
+_p.Menu:enable()
+_p.MasterControl.WalkEnabled = true   
+end
+
+if(Value == "Party[4]")then
+_p.Network:get("PDS", "takeItem",4)
+_p.Menu:enable()
+_p.MasterControl.WalkEnabled = true   
+end
+
+if(Value == "Party[5]")then
+_p.Network:get("PDS", "takeItem",5)
+_p.Menu:enable()
+_p.MasterControl.WalkEnabled = true   
+end
+
+if(Value == "Party[6]")then
+_p.Network:get("PDS", "takeItem",6)
+_p.Menu:enable()
+_p.MasterControl.WalkEnabled = true   
+end
+
+end)
+
+
+ -- Seller end
+
  --MISC
-local MiscTab = Window:CreateTab('Main', true, 'rbxassetid://12085151652', Vector2.new(524, 44), Vector2.new(36, 36))
+local MiscTab = Window:CreateTab('Main', true, '')
 
 local Section = MiscTab:CreateSection('Main Features')
 
-local Button = Section:CreateButton('Heal 💟', function()
+local Button = Section:CreateButton('.Heal 💟', function()
     local _p = nil
 for _, v in pairs(getgc(true)) do
     if typeof(v) == "table" then
@@ -1169,7 +1384,7 @@ end
     _p.Network:get("PDS", "getPartyPokeBalls")
 end)
 
-local Button = Section:CreateButton('Save 💾', function()
+local Button = Section:CreateButton('.Save 💾', function()
     local _p = nil
     for _, v in pairs(getgc(true)) do
         if typeof(v) == "table" then
@@ -1186,7 +1401,7 @@ local Button = Section:CreateButton('Save 💾', function()
     _p.MasterControl.WalkEnabled = true
 end)
 
-local Button = Section:CreateButton('Unstuck 🔓', function()
+local Button = Section:CreateButton('.Unstuck 🔓', function()
 
 local _p = nil
 for _, v in pairs(getgc(true)) do
@@ -1202,7 +1417,7 @@ end
         _p.MasterControl.WalkEnabled = true
 end)
 
-local Button = Section:CreateButton('Open Party List 🐶', function()
+local Button = Section:CreateButton('.OpenPartyList 🐶', function()
     local _p = nil
 for _, v in pairs(getgc(true)) do
     if typeof(v) == "table" then
@@ -1215,7 +1430,7 @@ end
     syn.secure_call(_p.Menu.party.open, localPlayer.PlayerScripts.ChatScript, _p.Menu.party)
 end)
 
-local Button = Section:CreateButton('Open PC 🖥️', function()
+local Button = Section:CreateButton('.OpenPC 🖥️', function()
     local _p = nil
 for _, v in pairs(getgc(true)) do
     if typeof(v) == "table" then
@@ -1230,7 +1445,7 @@ end
     _p.MasterControl.WalkEnabled = true
 end)
 
-local Button = Section:CreateButton('Beat All Gyms 🥇', function()
+local Button = Section:CreateButton('.BeatAllGyms 🥇', function()
     local _p = nil
 for _, v in pairs(getgc(true)) do
     if typeof(v) == "table" then
@@ -1257,7 +1472,7 @@ end
 
 end)
 
-local Button = Section:CreateButton('Fast Text [ON] ⏭️', function()
+local Button = Section:CreateButton('.FastText [ON] ⏭️', function()
     _p.Menu.options.FastText = true
  end)
 
@@ -1266,17 +1481,17 @@ local Button = Section:CreateButton('Fast Text [ON] ⏭️', function()
  
  local Section = PlayerTab:CreateSection('Player Features')
  
- local WalkSpeedSlider = Section:CreateSlider('Speed Hack', 1, 75, 16, Color3.fromRGB(0, 125, 255), function(Value)
+ local WalkSpeedSlider = Section:CreateSlider('.SpeedHack 🏃‍♀️', 1, 75, 16, Color3.fromRGB(0, 125, 255), function(Value)
      game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Value
  end)
  
-local Toggle = Section:CreateToggle('Noclip 🚶', false, Color3.fromRGB(0, 125, 255), 0.25, function(Value)
+local Toggle = Section:CreateToggle('.Noclip 🚶', false, Color3.fromRGB(0, 125, 255), 0.25, function(Value)
     getgenv().NoClip = Value
 end)
 
 
 
-local Dropdown = Section:CreateDropdown('Set Hoverboard 🛹', {'Basic Red', 'Basic Yellow', 'Basic Pink', 'Basic Green', 'Basic White', 'Basic Grey','Basic Black','Basic Blue'}, nil, 0.25, function(Value)
+local Dropdown = Section:CreateDropdown('.SetHoverboard 🛹', {'Basic Red', 'Basic Yellow', 'Basic Pink', 'Basic Green', 'Basic White', 'Basic Grey','Basic Black','Basic Blue'}, nil, 0.25, function(Value)
     local _p = nil
     for _, v in pairs(getgc(true)) do
         if typeof(v) == "table" then
@@ -1290,7 +1505,7 @@ local Dropdown = Section:CreateDropdown('Set Hoverboard 🛹', {'Basic Red', 'Ba
     _p.Network:get("PDS", "setHoverboard", Value)
 end)
  
-local Toggle = Section:CreateToggle('Toggle Repel 🏃🐶', false, Color3.fromRGB(0, 125, 255), 0.25, function(Value)
+local Toggle = Section:CreateToggle('.ToggleRepel 🏃🐶', false, Color3.fromRGB(0, 125, 255), 0.25, function(Value)
     if Value == true then
         __AutoFinder.OldEncounterChance = _p.RegionData.currentChunk.regionData.GrassEncounterChance 
         InfRepel = true
@@ -1306,11 +1521,11 @@ local MiscTab = Window:CreateTab('Misc', true, 'rbxassetid://12085151652', Vecto
 
 local Section = MiscTab:CreateSection('Misc Features')
 
-local FPSSlider = Section:CreateSlider('Frames Per Second 💻 (Reduce CPU Usage)', 1, 340, 144, Color3.fromRGB(0, 125, 255), function(Value)
+local FPSSlider = Section:CreateSlider('.FPS 💻 (Reduce CPU Usage)', 1, 340, 144, Color3.fromRGB(0, 125, 255), function(Value)
     setfpscap(Value)
 end)
 
-local Button = Section:CreateButton('Material Remover 🙅‍♂️🏗️', function()
+local Button = Section:CreateButton('.MaterialRemover 🙅‍♂️🏗️', function()
     _G.Settings = {
         Players = {
             ["Ignore Me"] = true, -- Ignore your Character
@@ -1341,11 +1556,11 @@ local Button = Section:CreateButton('Material Remover 🙅‍♂️🏗️', fun
     )
 end)
 
-local Button = Section:CreateButton('Chat Translator 💬🌐', function()
+local Button = Section:CreateButton('.ChatTranslator 💬🌐', function()
     loadstring(game:HttpGetAsync("https://i.qts.life/r/ChatInlineTranslator.lua", true))()
 end)
 
-local Button = Section:CreateButton('Ctrl + TP 🌀', function()
+local Button = Section:CreateButton('.CtrlTP 🌀', function()
     local Plr = game:GetService("Players").LocalPlayer
     local Mouse = Plr:GetMouse()
     Mouse.Button1Down:connect(
@@ -1361,11 +1576,11 @@ local Button = Section:CreateButton('Ctrl + TP 🌀', function()
     )
 end)
 
-local Button = Section:CreateButton('Rejoin 🔗🔄', function()
+local Button = Section:CreateButton('.Rejoin 🔗🔄', function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/Exunys/Rejoin-Game/main/Rejoin%20Game.lua"))()
 end)
 
-local Button = Section:CreateButton('Server Browser 🖥️🗃️', function()
+local Button = Section:CreateButton('.ServerBrowser 🖥️🗃️', function()
     loadstring(game:HttpGet("https://www.scriptblox.com/raw/Server-Browser_80", true))()
 end)
 
@@ -1376,61 +1591,61 @@ local LibraryFunctions = Window:CreateTab('UI Config', false, 'rbxassetid://1208
  
 local UIFunctions = LibraryFunctions:CreateSection('UI Functions')
  
-local UiButton = UIFunctions:CreateButton('Load old MewHub', function()  
+local UiButton = UIFunctions:CreateButton('.LoadOldMewHub', function()  
 loadstring(game:HttpGet("https://raw.githubusercontent.com/bigbootylatinas/MewHub/main/v2", true))()
 end)
 
-local DestroyButton = UIFunctions:CreateButton('Destroy UI', function()
+local DestroyButton = UIFunctions:CreateButton('.DestroyUI', function()
     Library:DestroyUI()
 end)
  
-local ToggleKeybind = UIFunctions:CreateKeybind('Toggle UI', 'LeftAlt', function()
+local ToggleKeybind = UIFunctions:CreateKeybind('.ToggleUI', 'LeftAlt', function()
     Library:ToggleUI()
 end)
  
-local TextboxKeybind = UIFunctions:CreateTextbox('Notification', 'Text', function(Value)
+local TextboxKeybind = UIFunctions:CreateTextbox('.Notification', 'Text', function(Value)
     Library:CreateNotification('Notification', Value, 5)
 end)
  
-local TransparencySlider = UIFunctions:CreateSlider('Transparency', 0, 100, 0, Color3.fromRGB(0, 125, 255), function(Value)
+local TransparencySlider = UIFunctions:CreateSlider('.Transparency', 0, 100, 0, Color3.fromRGB(0, 125, 255), function(Value)
     Library:SetTransparency(Value / 100, true)
 end)
  
-local ConfigSection = LibraryFunctions:CreateSection('Config')
+local ConfigSection = LibraryFunctions:CreateSection('.Config')
  
 local ConfigNameString = ''
-local ConfigName = ConfigSection:CreateTextbox('Config Name', 'Input', function(Value)
+local ConfigName = ConfigSection:CreateTextbox('.ConfigName', 'Input', function(Value)
     ConfigNameString = Value
 end)
  
-local SaveConfigButton = ConfigSection:CreateButton('Save Config', function()
+local SaveConfigButton = ConfigSection:CreateButton('.SaveConfig', function()
     Library:SaveConfig(ConfigNameString)
 end)
  
 local SelectedConfig = ''
-local ConfigsDropdown = ConfigSection:CreateDropdown('Configs', Library:GetConfigs(), nil, 0.25, function(Value)
+local ConfigsDropdown = ConfigSection:CreateDropdown('.Configs', Library:GetConfigs(), nil, 0.25, function(Value)
     SelectedConfig = Value
 end)
  
-local DeleteConfigButton = ConfigSection:CreateButton('Delete Config', function()
+local DeleteConfigButton = ConfigSection:CreateButton('.DeleteConfig', function()
     Library:DeleteConfig(SelectedConfig)
 end)
  
-local LoadConfigButton = ConfigSection:CreateButton('Load Config', function()
+local LoadConfigButton = ConfigSection:CreateButton('.LoadConfig', function()
     Library:LoadConfig(SelectedConfig)
 end)
  
-local RefreshConfigsButton = ConfigSection:CreateButton('Refresh', function()
+local RefreshConfigsButton = ConfigSection:CreateButton('.Refresh', function()
     ConfigsDropdown:UpdateDropdown(Library:GetConfigs())
 end)
  
-local ThemesSection = LibraryFunctions:CreateSection('Themes')
+local ThemesSection = LibraryFunctions:CreateSection('.Themes')
  
-local ThemesDropdown = ThemesSection:CreateDropdown('Themes', Library:GetThemes(), nil, 0.25, function(Value)
+local ThemesDropdown = ThemesSection:CreateDropdown('.Themes', Library:GetThemes(), nil, 0.25, function(Value)
     Library:ChangeTheme(Value)
 end)
  
-local ColorSection = LibraryFunctions:CreateSection('Custom Colors')
+local ColorSection = LibraryFunctions:CreateSection('.CustomColors')
  
 for Index, CurrentColor in next, Library:ReturnTheme() do
     ColorSection:CreateColorpicker(Index, CurrentColor, 0.25, function(Color)
@@ -1441,7 +1656,7 @@ end
 local Tab = Window:CreateTab('', true, '', Vector2.new(524, 44), Vector2.new(36, 36))
 
 local Section = Tab:CreateSection('Credits')
- Library:SetTransparency(85 / 100, true)
+ Library:SetTransparency(80 / 100, true)
 local Label1 = Section:CreateLabel('.gg/Mewhub')
 
 
