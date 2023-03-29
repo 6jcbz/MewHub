@@ -13,4 +13,4 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/bigbootylatinas/MewHu
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=bigbootylatinas&label=Profile%20views&color=0e75b6&style=flat" alt="bigbootylatinas" /> </p>
 
 
-- 👨‍💻 My latest script is available at [THIS LINK](https://github.com/bigbootylatinas/MewHub/blob/main/Last%20MewHub%20update.lua)
+<p align="left"> - 👨‍💻 My latest script is available at [THIS LINK](https://github.com/bigbootylatinas/MewHub/blob/main/Last%20MewHub%20update.lua)</p>
