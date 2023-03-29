@@ -7,5 +7,5 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/bigbootylatinas/MewHu
 ```                                                                                                                                                      
 <h1 align="center">Hi 👋, This is MewHub</h1>
 <h3 align="center">A roblox script made for Pokemon Brick Bronze games</h3>
-<img align="right" alt="Coding" width="400" src="https://cdn.discordapp.com/attachments/503587967709741219/1017969477381537834/mew-pokemon.gif">
+<img align="center" alt="Coding" width="1200" src="https://cdn.discordapp.com/attachments/503587967709741219/1017969477381537834/mew-pokemon.gif">
 
