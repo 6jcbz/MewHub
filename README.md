@@ -3,7 +3,9 @@
 getgenv().WishList = {"Pidgey, Weedle"} 
 getgenv().Webhook = "your webhook here"
 
-local http_request = http_request or request or (syn and syn.request) or (http and http.request) loadstring(http_request({Url="https://raw.githubusercontent.com/bigbootylatinas/MewHub/main/Last%20MewHub%20update.lua",Method="GET"}).Body)()
+local http_request = http_request or request or (syn and syn.request) or (http and http.request)
+
+loadstring(http_request({Url="https://raw.githubusercontent.com/bigbootylatinas/MewHub/main/Last%20MewHub%20update.lua",Method="GET"}).Body)()
 
 ```                                                                                                                                                      
 <h1 align="center">Hi 👋, This is MewHub</h1>
