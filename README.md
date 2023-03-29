@@ -12,6 +12,5 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/bigbootylatinas/MewHu
 
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=bigbootylatinas&label=Profile%20views&color=0e75b6&style=flat" alt="bigbootylatinas" /> </p>
 
-<p align="left"> <a href="https://twitter.com/d2rkrai" target="blank"><img src="https://img.shields.io/twitter/follow/d2rkrai?logo=twitter&style=for-the-badge" alt="d2rkrai" /></a> </p>
 
 - 👨‍💻 My latest script is available at [THIS LINK](https://github.com/bigbootylatinas/MewHub/blob/main/Last%20MewHub%20update.lua)
