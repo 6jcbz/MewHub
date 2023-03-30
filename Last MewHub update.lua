@@ -1216,22 +1216,6 @@ LabelSection= Section:CreateLabel('                                  -｡ﾟ•�
 
 
 
-
-
-local localPlayer = game:GetService("Players").LocalPlayer
-local _p = nil
-for _, v in pairs(getgc(true)) do
-    if typeof(v) == "table" then
-        if rawget(v, "PlayerData") then
-            _p = v
-            break
-        end
-    end
-end
-
-LabelPokedollars= Section:CreateLabel(".Pokedollars 💰 = $".._p.PlayerData.money)
-
-
 local Dropdown = Section:CreateDropdown('.BuyItems 🛍️ ', {"Pokemart 🏪","BP Shop 🏬", "Stoneshop 💎", "Arcade Shop 🎫"}, nil, 0.25, function(Value)
 
 local localPlayer = game:GetService("Players").LocalPlayer
