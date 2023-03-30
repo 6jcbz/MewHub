@@ -1090,7 +1090,7 @@ if syn and syn.protect_gui then
     syn.protect_gui(game:GetService("CoreGui"))
     syn.protect_gui(game:GetService("StarterGui"))
 end
-local Window = Library:CreateWindow('🎱 MewHub', "dev test", 'Loading | MewHub', 'rbxassetid://10110319522', false, 'VisualUIConfigs', 'Krnl')
+local Window = Library:CreateWindow('🎱 MewHub', "dev test", 'Welcome ..game.Players.LocalPlayer.Name.. ', 'https://www.roblox.com/headshot-thumbnail/image?userId=".. game.Players.LocalPlayer.UserId .."&width=420&height=420&format=png', false, 'VisualUIConfigs', 'Krnl')
 
 
 
