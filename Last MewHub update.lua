@@ -1090,7 +1090,7 @@ if syn and syn.protect_gui then
     syn.protect_gui(game:GetService("CoreGui"))
     syn.protect_gui(game:GetService("StarterGui"))
 end
-local Window = Library:CreateWindow('🎱 MewHub', "dev test", 'Welcome ..game.Players.LocalPlayer.Name.. ', 'https://www.roblox.com/headshot-thumbnail/image?userId=".. game.Players.LocalPlayer.UserId .."&width=420&height=420&format=png', false, 'VisualUIConfigs', 'Krnl')
+local Window = Library:CreateWindow('🎱 MewHub', "dev test", "Welcome | "..game.Players.LocalPlayer.Name.."", "https://www.roblox.com/headshot-thumbnail/image?userId="..game.Players.LocalPlayer.UserId .."&width=420&height=420&format=png", false, 'VisualUIConfigs', 'Krnl')
 
 
 
@@ -1642,5 +1642,4 @@ local Tab = Window:CreateTab('', true, '', Vector2.new(524, 44), Vector2.new(36,
 local Section = Tab:CreateSection('Credits')
  Library:SetTransparency(80 / 100, true)
 local Label1 = Section:CreateLabel('.gg/Mewhub')
-
 
