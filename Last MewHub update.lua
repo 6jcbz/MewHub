@@ -380,7 +380,7 @@ end
  
  
 function AutoFinder:CanGetPokemon()
-    return self.isShiny == true and GetShiny == true and true or self.Variation ~= "No Variation" and GetVariations == true and true or table.find(WishList, self.PokemonName) and true or false
+    return (self.isShiny == true) and (GetShiny == true) and (true) or (self.Variation ~= "No Variation") and (GetVariations == true) and true or table.find(WishList, self.PokemonName) and (GetShiny == false) or false or table.find(WishList, self.PokemonName) and (self.isShiny == true)
 end
  
 function AutoFinder:UpdateLabels()
@@ -1642,4 +1642,3 @@ local Tab = Window:CreateTab('', true, '', Vector2.new(524, 44), Vector2.new(36,
 local Section = Tab:CreateSection('Credits')
  Library:SetTransparency(80 / 100, true)
 local Label1 = Section:CreateLabel('.gg/Mewhub')
-
