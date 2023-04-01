@@ -380,7 +380,7 @@ end
  
  
 function AutoFinder:CanGetPokemon()
-    return (self.isShiny == true) and (GetShiny == true) and (Wishlist == nil) or (self.Variation ~= "No Variation") and (GetVariations == true) and true or table.find(WishList, self.PokemonName) and (GetShiny == false) or table.find(WishList, self.PokemonName) and (self.isShiny == true)
+    return (self.isShiny == true) and (GetShiny == true) and (Wishlist == nil) or (self.Variation ~= "No Variation") and (GetVariations == true) and true or table.find(WishList, self.PokemonName) and (GetShiny == false) and false or table.find(WishList, self.PokemonName) and (self.isShiny == true)
 end
  
 function AutoFinder:UpdateLabels()
@@ -939,10 +939,12 @@ function AutoFinder:Start()
             LabelEncounters:UpdateLabel("Total Encounters 🐭: "..self.TotalEncounters, true)
  
             if self:CanGetPokemon() then
-                if self.isShiny then
+                if self.isShiny and table.find(WishList, self.PokemonName) then
                 self.ShinyEncounters = self.ShinyEncounters+1
                 LabelShinyEncounters:UpdateLabel("Shiny Encounters 🐹: "..self.ShinyEncounters, true)
                 end
+
+                
                 self:WaitForPlayer()
                 else
                     self.CurrentBattle:destroy()
