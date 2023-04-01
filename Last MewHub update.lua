@@ -380,7 +380,7 @@ end
  
  
 function AutoFinder:CanGetPokemon()
-    return (self.isShiny == true) and (GetShiny == true) and (true) or (self.Variation ~= "No Variation") and (GetVariations == true) and true or table.find(WishList, self.PokemonName) and (GetShiny == false) or false or table.find(WishList, self.PokemonName) and (self.isShiny == true)
+    return (self.isShiny == true) and (GetShiny == true) and (true) or (self.Variation ~= "No Variation") and (GetVariations == true) and true or table.find(WishList, self.PokemonName) and (GetShiny == false) or table.find(WishList, self.PokemonName) and (self.isShiny == true)
 end
  
 function AutoFinder:UpdateLabels()
