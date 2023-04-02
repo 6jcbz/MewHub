@@ -323,9 +323,6 @@ local Camera = Workspace.CurrentCamera
 local PlayerExploit = is_sirhurt_closure and "Sirhurt" or pebc_execute and "ProtoSmasher" or syn and "Synapse X" or secure_load and "Sentinel" or KRNL_LOADED and "Krnl" or SONA_LOADED and "Sona" or "Kid with shit exploit"
 local FinalString = nil
  
-
- --]]
-
 --//Imports
  
 --//Plugins
@@ -382,7 +379,7 @@ end
  
 function AutoFinder:CanGetPokemon()
     
-    -- check if  .GetOnlyShiny  is ON
+    -- check if  .GetOnlyShiny is ON and  .GetOnlyShiny  is ON
     if(GetOnlyShiny == true) then do
         return self.isShiny == true and GetOnlyShiny == true and true
     end
@@ -393,7 +390,7 @@ function AutoFinder:CanGetPokemon()
     end 
 
     -- check if  .GetShiny  is ON
-    elseif(table.find(WishList, self.PokemonName) and (GetShiny == true) and false) then do
+    elseif(GetShiny == true) then do
     return (self.isShiny == true) and table.find(WishList, self.PokemonName) and false
     end 
 
@@ -415,9 +412,6 @@ end
 end
 
 
-
-
- 
 function AutoFinder:UpdateLabels()
     
 self.Variation = string.len(self.Variation) == 0 and "No Variation" or self.Variation
@@ -959,7 +953,7 @@ function AutoFinder:Start()
                 self.CreateBattle = "Creating"
                 self:CreateEncounter() --Battle:new()
                 self.CreateBattle = "Created"
-                LabelAutoFinderStatus:UpdateLabel("Status: New encounter successfully created! <"..tostring(math.random(1000,10000))..">", true)
+                LabelAutoFinderStatus:UpdateLabel("Status: New encounter successfully created! <"..tostring((self.ShinyEncounters/self.TotalEncounters)*100).."%>", true)
             end
         end
  
