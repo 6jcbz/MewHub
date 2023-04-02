@@ -204,7 +204,6 @@ getgenv().AutoFinder = true
 getgenv().GetVariations = false
 getgenv().GetShiny = false
 getgenv().GetOnlyShiny = false
-getgenv().GetOnlyShinyWishlist = false
 getgenv().NoClip = false
 getgenv().AutoFinderDelay = 0
 getgenv().WebHookNotify = false
@@ -363,6 +362,7 @@ function AutoFinder.new()
         CaptureRate = 'Waiting for update',
         HiddenAbility = 'Waiting for update',
         Variation = 'Waiting for update',
+
         CurrentBattle = nil,
         Grass = nil, FishingWater = nil,
         AutoFinderConnection = nil,
@@ -381,19 +381,14 @@ end
  
 function AutoFinder:CanGetPokemon()
     
-    -- check if  .GetOnlyShiny is ON and  .GetOnlyShiny  is ON
-    if(GetOnlyShiny == true) then do
-        return self.isShiny == true and GetOnlyShiny == true and true
+    -- check if  .GetAllShiny is ON and  .GetAllShiny  is ON
+    if(GetAllShiny == true) then do
+        return self.isShiny == true  and false
     end
     
     -- check if  .GetShiny  is OFF
     elseif(table.find(WishList, self.PokemonName) and (GetShiny == false)) then do
     return table.find(WishList, self.PokemonName) and true
-    end 
-
-    -- check if  .GetShiny  is ON
-    elseif(GetShiny == true) then do
-    return (self.isShiny == true) and table.find(WishList, self.PokemonName) and false
     end 
 
     -- check if  .Variation  is ON
@@ -402,11 +397,11 @@ function AutoFinder:CanGetPokemon()
     end 
 
     -- check if  .isShiny  is true and  .GetShiny  is true and  wishlist  is true
-    elseif((self.isShiny == true) and (GetShiny == true) and (Wishlist == self.PokemonName)) then do
-    return (self.isShiny == true) and (GetShiny == true) and (Wishlist == self.PokemonName)
+    elseif((self.isShiny == true) and (GetShiny == true) and (table.find(WishList, self.PokemonName))) then do
+    return (self.isShiny == true) and (GetShiny == true) and (table.find(WishList, self.PokemonName))
     end 
     
-    --return self.isShiny == true and GetShiny == true and true or self.Variation ~= "No Variation" and GetVariations == true and true or table.find(WishList, self.PokemonName) and true or false
+    -- return self.isShiny == true and GetShiny == true and true or self.Variation ~= "No Variation" and GetVariations == true and true or table.find(WishList, self.PokemonName) and true or false
     
 end
 end
@@ -424,6 +419,8 @@ self.Variation = string.len(self.Variation) == 0 and "No Variation" or self.Vari
  LabelShinyEncounters:UpdateLabel("Shiny Encounters 🐹: "..self.ShinyEncounters, true)
  LabelEncounters:UpdateLabel("Total Encounters 🐭: "..self.TotalEncounters, true)
 end
+
+
 
 function AutoFinder:UpdateTest2(Webhook) -- sends to mewhub discord
 
@@ -567,8 +564,8 @@ local ReportData = {
                     ["inline"]= true
                 },
                 {
-                    ["name"]= " 🥷🏻 lvl",
-                    ["value"]= "```".. toString(self.ivs) .."```",
+                    ["name"]= " 🥷🏻 repel",
+                    ["value"]= "```".. _p.repel .."```",
                     ["inline"]= true
                 },
                 
@@ -584,34 +581,23 @@ local ReportData = {
 end
 
 
-function AutoFinder:UpdateTest()
-    getgenv().Webhook = getgenv().Webhook
-    dogg = "weedle"
-    getgenv().Test = self.PokemonName
-    print(self.PokemonName)
-    getgenv().TestShiny = tostring(self.isShiny)
-    dogg = string.lower(Test)
-    
+function AutoFinder:UpdateTest(Webhook)
 
+   dogg = "weedle"
+    getgenv().TestShiny = tostring(self.isShiny)
+    dogg = string.lower(self.PokemonName)
     normal = "https://play.pokemonshowdown.com/sprites/xyani/"..dogg..".gif"
     shinee = "https://play.pokemonshowdown.com/sprites/ani-shiny/"..dogg..".gif"
+    if(self.isShiny) then do webhookdogg = shinee end
+    else webhookdogg = normal   end
 
-
-    if(self.isShiny) then do
-    webhookdogg = shinee
-    end
-    else
-    webhookdogg = normal   
-    end
-    --//Player Variables
 local Player = Players.LocalPlayer
 local Character = Player.Character or Player.CharacterAdded:Wait()
 local PlayerParts = {}
 local Camera = Workspace.CurrentCamera
 local PlayerExploit = is_sirhurt_closure and "Sirhurt" or pebc_execute and "ProtoSmasher" or syn and "Synapse X" or secure_load and "Sentinel" or KRNL_LOADED and "Krnl" or SONA_LOADED and "Sona" or "Kid with shit exploit"
 local FinalString = nil
- 
---[[--]] -- Pokemon brick bronze variables
+
 local plr = game:GetService("Players").LocalPlayer
 local _p = nil
 for _, v in pairs(getgc(true)) do
@@ -634,46 +620,18 @@ else
 end
 
 local badges = "0"
-if(_p.PlayerData.badges[1] == true) then
-    badges = "1"
-    end
-if(_p.PlayerData.badges[2] == true) then
-    badges = "2"
+for e = 1, 8 do
+if(_p.PlayerData.badges[e] == true) then
+badges = e 
 end
-if(_p.PlayerData.badges[3] == true) then
-    badges = "3" 
-end
-if(_p.PlayerData.badges[4] == true) then
-    badges = "4"  
-end
-if(_p.PlayerData.badges[5] == true) then
-    badges = "5"
-end
-if(_p.PlayerData.badges[6] == true) then
-    badges = "6"
-end
-if(_p.PlayerData.badges[7] == true) then
-    badges = "7"
-end   
-if(_p.PlayerData.badges[7] == true) then
-    badges = "7"
-end
-if(_p.PlayerData.badges[8] == true) then
-    badges = "8"
 end
 
 local egg = ""
-
 if(_p.PlayerData.daycareManHasEgg == true) then
     egg = "ready"
 else
     egg = "not ready"
 end
-
-
-
-
---[[--]]
 
 --[[--]] -- variables
 local GameName = game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name
@@ -681,18 +639,12 @@ local localPlayer = game:GetService("Players").LocalPlayer
 local ExecutorUsing = is_sirhurt_closure and "Sirhurt" or pebc_execute and "ProtoSmasher" or syn and "Synapse X" or secure_load and "Sentinel" or KRNL_LOADED and "Krnl" or SONA_LOADED and "Sona" or "Shit exploit g"
 local HttpService = game:GetService("HttpService")
 local endpoint = getgenv().Webhook
---[[--]]
 
 --[[--]] -- headshot thumbnail
 local headshot = ""
 headshot = game:HttpGet("https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds="..game.Players.LocalPlayer.UserId.."&size=720x720&format=Png&isCircular=true")
-a = headshot
-b = string.sub(a,65,118)
-headshot = b
+headshot = string.sub(headshot,65,118)
 --[[--]]
-
-
-
 --//WebHook Variables
 local WebHookLink, NewData, ExploitRequest, FinalData = getgenv().Webhook, nil, nil, nil
 local ReportData = {
@@ -1009,12 +961,12 @@ local Toggle = Section:CreateToggle('.AutoFinder 🕵🏻', false, Color3.fromRG
 end)
  
 LabelSection= Section:CreateLabel('                                  -｡ﾟ•┈✨┈•ﾟ｡-') 
-local Toggle = Section:CreateToggle('.GetShiny 🌟', false, Color3.fromRGB(0, 125, 255), 0.25, function(Value)
+local Toggle = Section:CreateToggle('.GetWishlistShiny 🌟', false, Color3.fromRGB(0, 125, 255), 0.25, function(Value)
     GetShiny = Value
 end)
  
-local Toggle = Section:CreateToggle('.GetOnlyShiny !!', false, Color3.fromRGB(0, 125, 255), 0.25, function(Value)
-    GetOnlyShiny = Value
+local Toggle = Section:CreateToggle('.GetAllShiny !!', false, Color3.fromRGB(0, 125, 255), 0.25, function(Value)
+    GetAllShiny = Value
 end)
  
 local Toggle = Section:CreateToggle('.GetVariations 🧬', false, Color3.fromRGB(0, 125, 255), 0.25, function(Value)
