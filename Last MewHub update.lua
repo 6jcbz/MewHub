@@ -408,7 +408,7 @@ function AutoFinder:CanGetPokemon()
     end 
     
     -- check if  .GetOnlyShinyWishlist  is ON
-    elseif(getgenv().GetOnlyShinyWishlist) then do
+    elseif(getgenv().GetOnlyShinyWishlist == true) then do
     return (self.isShiny == true) and (GetOnlyShinyWishlist == true) and (ShinyWishlist == self.PokemonName)
     end
     
