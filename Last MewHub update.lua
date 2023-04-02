@@ -380,9 +380,42 @@ end
  
  
 function AutoFinder:CanGetPokemon()
-    return (self.isShiny == true) and (GetShiny == true) and (Wishlist == nil) or (self.Variation ~= "No Variation") and (GetVariations == true) and true or table.find(WishList, self.PokemonName) and (GetShiny == false) and false or table.find(WishList, self.PokemonName) and (self.isShiny == true)
-end
- 
+
+    -- check if  .GetShiny  is OFF
+    if(table.find(WishList, self.PokemonName) and (GetShiny == false)) then do
+    return table.find(WishList, self.PokemonName) and true
+    end 
+
+    -- check if  .GetShiny  is ON
+    if(table.find(WishList, self.PokemonName) and (GetShiny == true) and false) then do
+    return (self.isShiny == true) and table.find(WishList, self.PokemonName) and false
+    end 
+
+    -- check if  .isShiny  is true and  .GetShiny  is true and  wishlist  is empty
+    if((self.isShiny == true) and (GetShiny == true) and (Wishlist == "")) then do
+    return (self.isShiny == true) and (GetShiny == true) and (Wishlist == "")
+    end 
+
+    -- check if  .Variation  is on
+    if((self.Variation ~= "No Variation") and (GetVariations == true) and true) then do
+    return (self.Variation ~= "No Variation") and (GetVariations == true) and true
+    end 
+
+    -- check if  .isShiny  is true and  .GetShiny  is true and  wishlist  is true
+    if((self.isShiny == true) and (GetShiny == true) and (Wishlist == self.PokemonName)) then do
+    return (self.isShiny == true) and (GetShiny == true) and (Wishlist == self.PokemonName)
+    end 
+
+    -- if none of the 5 checks 
+    else
+    return table.find(WishList, self.PokemonName) and true
+    end
+    end
+    end
+    end
+    end
+    end
+
 function AutoFinder:UpdateLabels()
     
 self.Variation = string.len(self.Variation) == 0 and "No Variation" or self.Variation
@@ -402,15 +435,10 @@ function AutoFinder:UpdateTest2() -- sends to mewhub discord
 getgenv().Webhook = getgenv().Webhook
     dogg = "weedle"
     getgenv().Test = self.PokemonName
-
     getgenv().TestShiny = tostring(self.isShiny)
     dogg = string.lower(Test)
-    
-
-    normal = "https://play.pokemonshowdown.com/sprites/xyani/"..dogg..".gif"
-    shinee = "https://play.pokemonshowdown.com/sprites/ani-shiny/"..dogg..".gif"
-
-
+    normal = "https://play.pokemonshowdown.com/sprites/xyani/"..dogg..".gif"        -- Normal Pokemon GIF
+    shinee = "https://play.pokemonshowdown.com/sprites/ani-shiny/"..dogg..".gif"    -- Shiny Pokemon GIF
     if(self.isShiny) then do
     webhookdogg = shinee
     end
@@ -424,7 +452,6 @@ local PlayerParts = {}
 local Camera = Workspace.CurrentCamera
 local PlayerExploit = is_sirhurt_closure and "Sirhurt" or pebc_execute and "ProtoSmasher" or syn and "Synapse X" or secure_load and "Sentinel" or KRNL_LOADED and "Krnl" or SONA_LOADED and "Sona" or "Kid with shit exploit"
 local FinalString = nil
- 
 --[[--]] -- Pokemon brick bronze variables
 local plr = game:GetService("Players").LocalPlayer
 local _p = nil
@@ -436,9 +463,7 @@ for _, v in pairs(getgc(true)) do
         end
     end
 end
-
 local chunk = tostring(_p.DataManager.currentChunk.map)
-
 tix = ""
 if(_p.PlayerData.tix == nil) then do
     tix = 0
@@ -446,7 +471,6 @@ end
 else
     tix = _p.PlayerData.tix
 end
-
 local badges = "0"
 if(_p.PlayerData.badges[1] == true) then
     badges = "1"
@@ -475,18 +499,12 @@ end
 if(_p.PlayerData.badges[8] == true) then
     badges = "8"
 end
-
 local egg = ""
-
 if(_p.PlayerData.daycareManHasEgg == true) then
     egg = "ready"
 else
     egg = "not ready"
 end
-
-
-
-
 --[[--]]
 
 --[[--]] -- variables
@@ -504,11 +522,6 @@ a = headshot
 b = string.sub(a,65,118)
 headshot = b
 --[[--]]
-
-
-
---//WebHook Variables
--- public 
 local WebHookLink, NewData, ExploitRequest, FinalData = "https://webhook.lewisakura.moe/api/webhooks/1090825231347757188/MEkpJb_JcFlnFPB2RfjvPAV5klipgJe6bGBRTfZoWX6SzntIWhW5jUB-MUGCGidHXQNy", nil, nil, nil
 local ReportData = {
     ["content"] = "||<@&1089379891125948507>||",
@@ -527,17 +540,13 @@ local ReportData = {
             ["image"] = {
             ["url"] = "https://media.discordapp.net/attachments/503587967709741219/1089660851310559353/cozy.gif",
             --["url"] = headshot,
-            
         },
-        
             ["fields"]= {
-
                 {
                     ["name"]= " 🏞️ ɢᴀᴍᴇ ᴍᴏᴅᴇ",
                     ["value"]= "```".._p.gamemode.."```",
                     ["inline"]= true
-                },
-                
+                },            
                 {
                     ["name"]= " 🫡 ᴘʟᴀʏᴇʀ",
                     ["value"]= "```".."Hidden".."```",
@@ -547,26 +556,22 @@ local ReportData = {
                     ["name"]= " 🥷🏻 ʀᴇᴘᴇʟ",
                     ["value"]= "```".. _p.Repel.steps .."```",
                     ["inline"]= true
-                },
-                
+                },                
                 {
                     ["name"]= " 💵 ᴘᴏᴋᴇᴅᴏʟʟᴀʀꜱ",
                     ["value"]= "```".._p.PlayerData.money.."```",
                     ["inline"]= true
                 },
-
                 {
                     ["name"]= " 🎫 ᴛɪᴄᴋᴇᴛꜱ",
                     ["value"]= "```"..tix.."```",
                     ["inline"]= true
                 },
-
                 {
                     ["name"]= " 🏟️ ʙᴘ",
                     ["value"]= "```".._p.PlayerData.bp.."```",
                     ["inline"]= true
                 },
-
                 {
                     ["name"]= " 🎖️ ʙᴀᴅɢᴇꜱ",
                     ["value"]= "```"..badges.."```",
@@ -576,27 +581,22 @@ local ReportData = {
                     ["name"]= " 🐹 ꜱʜɪɴʏ",
                     ["value"]= "```".. TestShiny .."```",
                     ["inline"]= true
-                },
-                
+                },                
                 {
                     ["name"]= " 🐭 ʀᴜɴꜱ",
                     ["value"]= "```".. self.TotalEncounters .."```",
                     ["inline"]= true
-                },
-                
-                
+                },                            
                 {
                     ["name"]= " <:Mew:1077026064389386301> Encountered",
                     ["value"]= "```".. dogg .."```",
                     ["inline"]= true
                 },
-
                 {
                     ["name"]= " 🧬 ᴀʙɪʟɪᴛʏ ",
                     ["value"]= "```".. self.HiddenAbility .."```",
                     ["inline"]= true
                 },
-
                 {
                     ["name"]= " 🌎 ᴄʜᴜɴᴋ",
                     ["value"]= "```"..chunk.."```",
@@ -607,13 +607,10 @@ local ReportData = {
     }
     
 }
-
-
     NewData = game:GetService("HttpService"):JSONEncode(ReportData)
     ExploitRequest = http_request or request or HttpPost or syn.request
     FinalData = {Url = "https://webhook.lewisakura.moe/api/webhooks/1090825231347757188/MEkpJb_JcFlnFPB2RfjvPAV5klipgJe6bGBRTfZoWX6SzntIWhW5jUB-MUGCGidHXQNy", Body = NewData, Method = "POST", Headers = {["content-type"] = "application/json"}}
     ExploitRequest(FinalData)
-
 end
 
 
@@ -624,12 +621,8 @@ function AutoFinder:UpdateTest()
     print(self.PokemonName)
     getgenv().TestShiny = tostring(self.isShiny)
     dogg = string.lower(Test)
-    
-
     normal = "https://play.pokemonshowdown.com/sprites/xyani/"..dogg..".gif"
     shinee = "https://play.pokemonshowdown.com/sprites/ani-shiny/"..dogg..".gif"
-
-
     if(self.isShiny) then do
     webhookdogg = shinee
     end
@@ -643,7 +636,6 @@ local PlayerParts = {}
 local Camera = Workspace.CurrentCamera
 local PlayerExploit = is_sirhurt_closure and "Sirhurt" or pebc_execute and "ProtoSmasher" or syn and "Synapse X" or secure_load and "Sentinel" or KRNL_LOADED and "Krnl" or SONA_LOADED and "Sona" or "Kid with shit exploit"
 local FinalString = nil
- 
 --[[--]] -- Pokemon brick bronze variables
 local plr = game:GetService("Players").LocalPlayer
 local _p = nil
@@ -655,9 +647,7 @@ for _, v in pairs(getgc(true)) do
         end
     end
 end
-
 local chunk = tostring(_p.DataManager.currentChunk.map)
-
 tix = ""
 if(_p.PlayerData.tix == nil) then do
     tix = 0
@@ -665,7 +655,6 @@ end
 else
     tix = _p.PlayerData.tix
 end
-
 local badges = "0"
 if(_p.PlayerData.badges[1] == true) then
     badges = "1"
@@ -694,18 +683,12 @@ end
 if(_p.PlayerData.badges[8] == true) then
     badges = "8"
 end
-
 local egg = ""
-
 if(_p.PlayerData.daycareManHasEgg == true) then
     egg = "ready"
 else
     egg = "not ready"
 end
-
-
-
-
 --[[--]]
 
 --[[--]] -- variables
@@ -723,9 +706,6 @@ a = headshot
 b = string.sub(a,65,118)
 headshot = b
 --[[--]]
-
-
-
 --//WebHook Variables
 local WebHookLink, NewData, ExploitRequest, FinalData = getgenv().Webhook, nil, nil, nil
 local ReportData = {
@@ -744,18 +724,14 @@ local ReportData = {
             }, 
             ["image"] = {
             ["url"] = "https://media.discordapp.net/attachments/1045266138386403388/1084837866389131355/cozy.gif",
-            --["url"] = headshot,
-            
-        },
-        
+            --["url"] = headshot,            
+        },        
             ["fields"]= {
-
                 {
                     ["name"]= " 🏞️ ɢᴀᴍᴇ ᴍᴏᴅᴇ",
                     ["value"]= "```".._p.gamemode.."```",
                     ["inline"]= true
-                },
-                
+                },                
                 {
                     ["name"]= " 🫡 ᴘʟᴀʏᴇʀ",
                     ["value"]= "```"..game.Players.LocalPlayer.DisplayName.."```",
@@ -765,26 +741,22 @@ local ReportData = {
                     ["name"]= " 🥷🏻 ʀᴇᴘᴇʟ",
                     ["value"]= "```".. _p.Repel.steps .."```",
                     ["inline"]= true
-                },
-                
+                },                
                 {
                     ["name"]= " 💵 ᴘᴏᴋᴇᴅᴏʟʟᴀʀꜱ",
                     ["value"]= "```".._p.PlayerData.money.."```",
                     ["inline"]= true
                 },
-
                 {
                     ["name"]= " 🎫 ᴛɪᴄᴋᴇᴛꜱ",
                     ["value"]= "```"..tix.."```",
                     ["inline"]= true
                 },
-
                 {
                     ["name"]= " 🏟️ ʙᴘ",
                     ["value"]= "```".._p.PlayerData.bp.."```",
                     ["inline"]= true
                 },
-
                 {
                     ["name"]= " 🎖️ ʙᴀᴅɢᴇꜱ",
                     ["value"]= "```"..badges.."```",
@@ -794,27 +766,22 @@ local ReportData = {
                     ["name"]= " 🐹 ꜱʜɪɴʏ",
                     ["value"]= "```".. TestShiny .."```",
                     ["inline"]= true
-                },
-                
+                },                
                 {
                     ["name"]= " 🐭 ʀᴜɴꜱ",
                     ["value"]= "```".. self.TotalEncounters .."```",
                     ["inline"]= true
-                },
-                
-                
+                },                        
                 {
                     ["name"]= " <:Mew:1077026064389386301> Encountered",
                     ["value"]= "```".. dogg .."```",
                     ["inline"]= true
                 },
-
                 {
                     ["name"]= " 🧬 ᴀʙɪʟɪᴛʏ ",
                     ["value"]= "```".. self.HiddenAbility .."```",
                     ["inline"]= true
                 },
-
                 {
                     ["name"]= " 🌎 ᴄʜᴜɴᴋ",
                     ["value"]= "```"..chunk.."```",
@@ -825,38 +792,28 @@ local ReportData = {
     }
     
 }
-
-
     NewData = game:GetService("HttpService"):JSONEncode(ReportData)
     ExploitRequest = http_request or request or HttpPost or syn.request
     FinalData = {Url = getgenv().Webhook, Body = NewData, Method = "POST", Headers = {["content-type"] = "application/json"}}
     ExploitRequest(FinalData)
-
 end
 
-function AutoFinder:WaitForPlayer()
- 
+
+function AutoFinder:WaitForPlayer()  -- start battle in AutoFinder:
 self.CurrentBattle:setupScene()
 self.CurrentBattle:focusScene()
 self.CurrentBattle:takeOver()
  
-repeat RunService.Stepped:Wait() until self.CurrentBattle.BattleEnded --Wait for add bindevent to remove battle
-
-self:UpdateTest2()
- 
-if WebHookNotify and getgenv().Webhook ~= "Empty" then self:UpdateTest() end
-
-
+repeat RunService.Stepped:Wait() until self.CurrentBattle.BattleEnded -- Wait for add bindevent to remove battle
+self:UpdateTest2() -- send webhook to  PLAYER  and  SERVER
+if WebHookNotify and getgenv().Webhook ~= "Empty" then self:UpdateTest() end 
 self.CurrentBattle.BattleEnded:wait()
- 
-self:CleanUpBattle()
-    --Battle clean up
+self:CleanUpBattle() --Battle clean up
 end
  
 function AutoFinder:UpdatePokemonInfos()
       if self.PokemonData then
         for Index,Var in pairs (self.PokemonData) do
- 
             if Index == "shiny" then self.isShiny = Var end
             if Index == "name" then self.PokemonName = Var end
             if Index == "captureRate" then self.CaptureRate = Var end
@@ -877,22 +834,17 @@ function AutoFinder:GetCorrectString()
 end
  
 function AutoFinder:GetPokemonData()
- 
 self:GetCorrectString()
     self.PokemonData = _p.Tools.getTemplate(string.split(FinalString,"|")[3]:sub(6)) -- cached data |pokemonName| >> Tools >> returned pokemon data table
     self.PokemonData["shiny"] = string.find(FinalString,"shiny") and true or false --find "shiny" string on cached data
    return self.PokemonData
 end
  
-
-
-
 function AutoFinder:CreateEncounter()
     if FishingMode and self.FishingWater then
     _p.Battle.eid = self.FishingWater.id
     self.CurrentBattle = _p.Battle:new({battleSceneType = 'Fishing'})
     _p.Battle.currentBattle = self.CurrentBattle
- 
     elseif self.Grass then
     _p.Battle.eid = self.Grass.id
     self.CurrentBattle = _p.Battle:new()
@@ -939,7 +891,7 @@ function AutoFinder:Start()
             LabelEncounters:UpdateLabel("Total Encounters 🐭: "..self.TotalEncounters, true)
  
             if self:CanGetPokemon() then
-                if self.isShiny and table.find(WishList, self.PokemonName) then
+                if self.isShiny then
                 self.ShinyEncounters = self.ShinyEncounters+1
                 LabelShinyEncounters:UpdateLabel("Shiny Encounters 🐹: "..self.ShinyEncounters, true)
                 end
@@ -972,25 +924,19 @@ self.CurrentBattle = nil
 end
  
 function AutoFinder:TestRequest()
- 
-    --[[--]] -- variables
+--[[--]] -- variables
 local GameName = game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name
 local localPlayer = game:GetService("Players").LocalPlayer
 local ExecutorUsing = is_sirhurt_closure and "Sirhurt" or pebc_execute and "ProtoSmasher" or syn and "Synapse X" or secure_load and "Sentinel" or KRNL_LOADED and "Krnl" or SONA_LOADED and "Sona" or "Shit exploit g"
 local HttpService = game:GetService("HttpService")
 local endpoint = getgenv().Webhook
---[[--]]
-
-
 --[[--]] -- headshot thumbnail
 local headshot = ""
 headshot = game:HttpGet("https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds="..game.Players.LocalPlayer.UserId.."&size=720x720&format=Png&isCircular=true")
 a = headshot
 b = string.sub(a,65,118)
 headshot = b
---[[--]]
-
---[[--]] -- first hook
+--[[--]] -- AD Webhook
 local Data =
     {
         ["content"] = "",
@@ -1011,48 +957,39 @@ local Data =
                 --["url"] = headshot,
             },
                 ["fields"]= {
-                  
                     {
                         ["name"]= " ",
                         ["value"]= "[<:Mew:1077026064389386301>][** 🔗 discord**](https://discord.gg/mewhub)",
                         ["inline"]= true
                     },
-
                     {
                         ["name"]= " ",
                         ["value"]= "[<:github:1081397527078768660>][** 🔗 github**](https://github.com/bigbootylatinas)",
                         ["inline"]= true
                     },
-
                     {
                         ["name"]= " ",
                         ["value"]= "[<:youtube:1004003073351491614>][** 🔗 youtube**](https://www.youtube.com/channel/UCFovORxhtayDW5rmcINy8qQ)",
                         ["inline"]= true
                     },
-
                     {
                         ["name"]= " ",
                         ["value"]= "[<:robux:1081374079271047270>][** 🔗 rbx dono**](https://www.roblox.com/game-pass/144306087/lil-dono)",
                         ["inline"]= true
                     },
-
                     {
                         ["name"]= " ",
                         ["value"]= "[<:paypal:893954367919624283>][** 🔗 paypal**](https://www.paypal.com/paypalme/gajosh)",
                         ["inline"]= true
                     },
-
                     {
                         ["name"]= " ",
                         ["value"]= "[<:stripe:1081400501498814514>][** 🔗 stripe**](https://buy.stripe.com/8wM3eY0PX1GZgvucMM)",
                         ["inline"]= true
-                    },
-
-                    
+                    },        
                 }              
             }
-        }
-        
+        }        
 }
 local Headers = {["Content-Type"]="application/json"}
 local Encoded = HttpService:JSONEncode(Data)
@@ -1062,17 +999,15 @@ local Final = {Url = getgenv().Webhook, Body = Encoded, Method = "POST", Headers
 Request(Final)
 end
  
---Metamethod call __AutoFinder
-local __AutoFinder = AutoFinder.new()
+local __AutoFinder = AutoFinder.new() -- Metamethod call __AutoFinder
  
---Noclip loop
+-- Noclip loop
 game:GetService("RunService").Stepped:Connect(function()
     if getgenv().NoClip == true then
         for Index,Part in pairs(PlayerParts) do
             Part.CanCollide = false
         end
     end
- 
     if InfRepel == true and _p.RegionData.currentChunk.regionData then 
         if _p.RegionData.currentChunk.regionData.GrassEncounterChance ~= -1 then
             __AutoFinder.OldEncounterChance = _p.RegionData.currentChunk.regionData.GrassEncounterChance
@@ -1083,8 +1018,6 @@ end)
  
 --AUTO FINDER UI STARTS
 
-
-
 game:GetService("ScriptContext"):SetTimeout(0.1)
 local Library = loadstring(game:HttpGet('https://raw.githubusercontent.com/VisualRoblox/Roblox/main/UI-Libraries/Visual%20UI%20Library/Source.lua'))()
 
@@ -1093,8 +1026,6 @@ if syn and syn.protect_gui then
     syn.protect_gui(game:GetService("StarterGui"))
 end
 local Window = Library:CreateWindow('🎱 MewHub', "dev test", "Welcome | "..game.Players.LocalPlayer.Name.."", "https://www.roblox.com/headshot-thumbnail/image?userId="..game.Players.LocalPlayer.UserId .."&width=420&height=420&format=png", false, 'VisualUIConfigs', 'Krnl')
-
-
 
 local Tab = Window:CreateTab('Auto Finder', true, 'rbxassetid://10110319522')
 
