@@ -2,6 +2,7 @@
 
 
 --getgenv().WishList = {"Pidgey"} 
+--getgenv().ShinyWishlist = {""}
 --getgenv().Webhook = ""
 
 
@@ -204,12 +205,14 @@ getgenv().AutoFinder = true
 getgenv().GetVariations = false
 getgenv().GetShiny = false
 getgenv().GetOnlyShiny = false
+getgenv().GetOnlyShinyWishlist = false
 getgenv().NoClip = false
 getgenv().AutoFinderDelay = 0
 getgenv().WebHookNotify = false
 getgenv().InfRepel = false
 getgenv().FishingMode = false 
 getgenv().Rod = "GoodRod"
+
 
 getgenv().Test = "nil" -- for webhook pokemon
 getgenv().TestShiny = "nil" -- for webhook
@@ -394,7 +397,7 @@ function AutoFinder:CanGetPokemon()
     return (self.isShiny == true) and table.find(WishList, self.PokemonName) and false
     end 
 
-    -- check if  .Variation  is on
+    -- check if  .Variation  is ON
     elseif((self.Variation ~= "No Variation") and (GetVariations == true) and true) then do
     return (self.Variation ~= "No Variation") and (GetVariations == true) and true
     end 
@@ -404,7 +407,10 @@ function AutoFinder:CanGetPokemon()
     return (self.isShiny == true) and (GetShiny == true) and (Wishlist == self.PokemonName)
     end 
     
-   
+    -- check if  .GetOnlyShinyWishlist  is ON
+    elseif(getgenv().GetOnlyShinyWishlist) then do
+    return (self.isShiny == true) and (GetOnlyShinyWishlist == true) and (ShinyWishlist == self.PokemonName)
+    end
     
     --return self.isShiny == true and GetShiny == true and true or self.Variation ~= "No Variation" and GetVariations == true and true or table.find(WishList, self.PokemonName) and true or false
     
@@ -1070,6 +1076,7 @@ local Toggle = Section:CreateToggle('.AutoFinder 🕵🏻', false, Color3.fromRG
     end
 end)
  
+LabelSection= Section:CreateLabel('                                  -｡ﾟ•┈✨┈•ﾟ｡-') 
 local Toggle = Section:CreateToggle('.GetShiny 🌟', false, Color3.fromRGB(0, 125, 255), 0.25, function(Value)
     GetShiny = Value
 end)
@@ -1078,6 +1085,10 @@ local Toggle = Section:CreateToggle('.GetOnlyShiny !!', false, Color3.fromRGB(0,
     GetOnlyShiny = Value
 end)
  
+local Toggle = Section:CreateToggle('.GetOnlyShinyWishlist !!', false, Color3.fromRGB(0, 125, 255), 0.25, function(Value)
+    GetOnlyShinyWishlist = Value
+end)
+
 local Toggle = Section:CreateToggle('.GetVariations 🧬', false, Color3.fromRGB(0, 125, 255), 0.25, function(Value)
     GetVariations = Value
 end)
