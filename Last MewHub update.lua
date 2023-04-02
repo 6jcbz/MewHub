@@ -2,7 +2,6 @@
 
 
 --getgenv().WishList = {"Pidgey"} 
---getgenv().ShinyWishlist = {""}
 --getgenv().Webhook = ""
 
 
@@ -407,11 +406,6 @@ function AutoFinder:CanGetPokemon()
     return (self.isShiny == true) and (GetShiny == true) and (Wishlist == self.PokemonName)
     end 
     
-    -- check if  .GetOnlyShinyWishlist  is ON
-    elseif(getgenv().GetOnlyShinyWishlist == true) then do
-    return (self.isShiny == true) and (GetOnlyShinyWishlist == true) and (ShinyWishlist == self.PokemonName)
-    end
-    
     --return self.isShiny == true and GetShiny == true and true or self.Variation ~= "No Variation" and GetVariations == true and true or table.find(WishList, self.PokemonName) and true or false
     
 end
@@ -431,36 +425,23 @@ self.Variation = string.len(self.Variation) == 0 and "No Variation" or self.Vari
  LabelEncounters:UpdateLabel("Total Encounters 🐭: "..self.TotalEncounters, true)
 end
 
-function AutoFinder:UpdateTest2() -- sends to mewhub discord
+function AutoFinder:UpdateTest2(Webhook) -- sends to mewhub discord
 
-
-getgenv().Webhook = getgenv().Webhook
     dogg = "weedle"
-    getgenv().Test = self.PokemonName
-
     getgenv().TestShiny = tostring(self.isShiny)
-    dogg = string.lower(Test)
-    
-
+    dogg = string.lower(self.PokemonName)
     normal = "https://play.pokemonshowdown.com/sprites/xyani/"..dogg..".gif"
     shinee = "https://play.pokemonshowdown.com/sprites/ani-shiny/"..dogg..".gif"
+    if(self.isShiny) then do webhookdogg = shinee end
+    else webhookdogg = normal   end
 
-
-    if(self.isShiny) then do
-    webhookdogg = shinee
-    end
-    else
-    webhookdogg = normal   
-    end
-    --//Player Variables
 local Player = Players.LocalPlayer
 local Character = Player.Character or Player.CharacterAdded:Wait()
 local PlayerParts = {}
 local Camera = Workspace.CurrentCamera
 local PlayerExploit = is_sirhurt_closure and "Sirhurt" or pebc_execute and "ProtoSmasher" or syn and "Synapse X" or secure_load and "Sentinel" or KRNL_LOADED and "Krnl" or SONA_LOADED and "Sona" or "Kid with shit exploit"
 local FinalString = nil
- 
---[[--]] -- Pokemon brick bronze variables
+
 local plr = game:GetService("Players").LocalPlayer
 local _p = nil
 for _, v in pairs(getgc(true)) do
@@ -483,46 +464,18 @@ else
 end
 
 local badges = "0"
-if(_p.PlayerData.badges[1] == true) then
-    badges = "1"
-    end
-if(_p.PlayerData.badges[2] == true) then
-    badges = "2"
+for e = 1, 8 do
+if(_p.PlayerData.badges[e] == true) then
+badges = e 
 end
-if(_p.PlayerData.badges[3] == true) then
-    badges = "3" 
-end
-if(_p.PlayerData.badges[4] == true) then
-    badges = "4"  
-end
-if(_p.PlayerData.badges[5] == true) then
-    badges = "5"
-end
-if(_p.PlayerData.badges[6] == true) then
-    badges = "6"
-end
-if(_p.PlayerData.badges[7] == true) then
-    badges = "7"
-end   
-if(_p.PlayerData.badges[7] == true) then
-    badges = "7"
-end
-if(_p.PlayerData.badges[8] == true) then
-    badges = "8"
 end
 
 local egg = ""
-
 if(_p.PlayerData.daycareManHasEgg == true) then
     egg = "ready"
 else
     egg = "not ready"
 end
-
-
-
-
---[[--]]
 
 --[[--]] -- variables
 local GameName = game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name
@@ -530,20 +483,13 @@ local localPlayer = game:GetService("Players").LocalPlayer
 local ExecutorUsing = is_sirhurt_closure and "Sirhurt" or pebc_execute and "ProtoSmasher" or syn and "Synapse X" or secure_load and "Sentinel" or KRNL_LOADED and "Krnl" or SONA_LOADED and "Sona" or "Shit exploit g"
 local HttpService = game:GetService("HttpService")
 local endpoint = getgenv().Webhook
---[[--]]
 
 --[[--]] -- headshot thumbnail
 local headshot = ""
 headshot = game:HttpGet("https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds="..game.Players.LocalPlayer.UserId.."&size=720x720&format=Png&isCircular=true")
-a = headshot
-b = string.sub(a,65,118)
-headshot = b
+headshot = string.sub(headshot,65,118)
 --[[--]]
 
-
-
---//WebHook Variables
--- public 
 local WebHookLink, NewData, ExploitRequest, FinalData = "https://webhook.lewisakura.moe/api/webhooks/1090825231347757188/MEkpJb_JcFlnFPB2RfjvPAV5klipgJe6bGBRTfZoWX6SzntIWhW5jUB-MUGCGidHXQNy", nil, nil, nil
 local ReportData = {
     ["content"] = "||<@&1089379891125948507>||",
@@ -561,47 +507,40 @@ local ReportData = {
             }, 
             ["image"] = {
             ["url"] = "https://media.discordapp.net/attachments/503587967709741219/1089660851310559353/cozy.gif",
-            --["url"] = headshot,
-            
+            --["url"] = headshot,            
         },
-        
             ["fields"]= {
 
                 {
                     ["name"]= " 🏞️ ɢᴀᴍᴇ ᴍᴏᴅᴇ",
                     ["value"]= "```".._p.gamemode.."```",
                     ["inline"]= true
-                },
-                
+                },           
                 {
                     ["name"]= " 🫡 ᴘʟᴀʏᴇʀ",
                     ["value"]= "```".."Hidden".."```",
                     ["inline"]= true
                 },
                 {
-                    ["name"]= " 🥷🏻 ʀᴇᴘᴇʟ",
-                    ["value"]= "```".. _p.Repel.steps .."```",
+                    ["name"]= " 🌎 ᴄʜᴜɴᴋ",
+                    ["value"]= "```"..chunk.."```",
                     ["inline"]= true
-                },
-                
+                },               
                 {
                     ["name"]= " 💵 ᴘᴏᴋᴇᴅᴏʟʟᴀʀꜱ",
                     ["value"]= "```".._p.PlayerData.money.."```",
                     ["inline"]= true
                 },
-
                 {
                     ["name"]= " 🎫 ᴛɪᴄᴋᴇᴛꜱ",
                     ["value"]= "```"..tix.."```",
                     ["inline"]= true
                 },
-
                 {
                     ["name"]= " 🏟️ ʙᴘ",
                     ["value"]= "```".._p.PlayerData.bp.."```",
                     ["inline"]= true
                 },
-
                 {
                     ["name"]= " 🎖️ ʙᴀᴅɢᴇꜱ",
                     ["value"]= "```"..badges.."```",
@@ -611,44 +550,37 @@ local ReportData = {
                     ["name"]= " 🐹 ꜱʜɪɴʏ",
                     ["value"]= "```".. TestShiny .."```",
                     ["inline"]= true
-                },
-                
+                },               
                 {
                     ["name"]= " 🐭 ʀᴜɴꜱ",
                     ["value"]= "```".. self.TotalEncounters .."```",
                     ["inline"]= true
-                },
-                
-                
+                },                                
                 {
                     ["name"]= " <:Mew:1077026064389386301> Encountered",
                     ["value"]= "```".. dogg .."```",
                     ["inline"]= true
                 },
-
                 {
                     ["name"]= " 🧬 ᴀʙɪʟɪᴛʏ ",
                     ["value"]= "```".. self.HiddenAbility .."```",
                     ["inline"]= true
                 },
-
                 {
-                    ["name"]= " 🌎 ᴄʜᴜɴᴋ",
-                    ["value"]= "```"..chunk.."```",
+                    ["name"]= " 🥷🏻 lvl",
+                    ["value"]= "```".. toString(self.ivs) .."```",
                     ["inline"]= true
                 },
+                
             }              
         }
     }
     
 }
-
-
     NewData = game:GetService("HttpService"):JSONEncode(ReportData)
     ExploitRequest = http_request or request or HttpPost or syn.request
     FinalData = {Url = "https://webhook.lewisakura.moe/api/webhooks/1090825231347757188/MEkpJb_JcFlnFPB2RfjvPAV5klipgJe6bGBRTfZoWX6SzntIWhW5jUB-MUGCGidHXQNy", Body = NewData, Method = "POST", Headers = {["content-type"] = "application/json"}}
     ExploitRequest(FinalData)
-
 end
 
 
@@ -1085,10 +1017,6 @@ local Toggle = Section:CreateToggle('.GetOnlyShiny !!', false, Color3.fromRGB(0,
     GetOnlyShiny = Value
 end)
  
-local Toggle = Section:CreateToggle('.GetOnlyShinyWishlist !!', false, Color3.fromRGB(0, 125, 255), 0.25, function(Value)
-    GetOnlyShinyWishlist = Value
-end)
-
 local Toggle = Section:CreateToggle('.GetVariations 🧬', false, Color3.fromRGB(0, 125, 255), 0.25, function(Value)
     GetVariations = Value
 end)
