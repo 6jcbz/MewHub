@@ -381,29 +381,23 @@ end
  
 function AutoFinder:CanGetPokemon()
     
-    -- check if  .GetAllShiny is ON and  .GetAllShiny  is ON
-    if(GetAllShiny == true) then do
-        return self.isShiny == true  and false
+    if GetAllShiny and self.isShiny then
+        return true
     end
     
-    -- check if  .GetShiny  is OFF
-    elseif(table.find(WishList, self.PokemonName) and (GetShiny == false)) then do
-    return table.find(WishList, self.PokemonName) and true
+    if not GetShiny and table.find(WishList, self.PokemonName) then
+        return true
     end 
 
-    -- check if  .Variation  is ON
-    elseif((self.Variation ~= "No Variation") and (GetVariations == true) and true) then do
-    return (self.Variation ~= "No Variation") and (GetVariations == true) and true
+    if GetVariations and self.Variation ~= "No Variation" then
+        return true
     end 
 
-    -- check if  .isShiny  is true and  .GetShiny  is true and  wishlist  is true
-    elseif((self.isShiny == true) and (GetShiny == true) and (table.find(WishList, self.PokemonName))) then do
-    return (self.isShiny == true) and (GetShiny == true) and (table.find(WishList, self.PokemonName))
+    if GetShiny and table.find(WishList, self.PokemonName) and self.isShiny then
+        return true
     end 
     
-    -- return self.isShiny == true and GetShiny == true and true or self.Variation ~= "No Variation" and GetVariations == true and true or table.find(WishList, self.PokemonName) and true or false
-    
-end
+    return false
 end
 
 
@@ -534,7 +528,7 @@ local ReportData = {
                     ["inline"]= true
                 },
                 {
-                    ["name"]= " 🏟️ ʙᴘ",
+                    ["name"]= " 🏟️ ʙᴘ",=
                     ["value"]= "```".._p.PlayerData.bp.."```",
                     ["inline"]= true
                 },
