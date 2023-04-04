@@ -355,8 +355,8 @@ local ReportData = {
                     ["inline"]= true
                 },
                 {
-                    ["name"]= " 🥷🏻 repel",
-                    ["value"]= "```".. _p.repel .."```",
+                    ["name"]= " 🥷🏻 test",
+                    ["value"]= "```".. "test" .."```",
                     ["inline"]= true
                 },
                 
