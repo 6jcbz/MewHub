@@ -13,21 +13,6 @@ getgenv().Rod = "GoodRod"
 getgenv().Test = "nil" -- for webhook pokemon
 getgenv().TestShiny = "nil" -- for webhook
 
---[[--]] -- Anti afk + rejoin
-local VirtualUser = game:service'VirtualUser'
-game:service'Players'.LocalPlayer.Idled:connect(function()
-    VirtualUser:CaptureController()
-    VirtualUser:ClickButton2(Vector2.new())
-end)
-
-game.Players.PlayerRemoving:connect(function(plr)
-   if plr == game.Players.LocalPlayer then
-     game:GetService('TeleportService'):Teleport(game.PlaceId)
-   end
-end)
---[[--]] 
-
-
 --[[--]] -- PBB Variables
 local LocalPlayer = game:GetService("Players").LocalPlayer
 local oldIndex = nil
@@ -218,7 +203,7 @@ function AutoFinder:UpdateTest2(Webhook) -- sends to mewhub discord
     dogg = "weedle"
     getgenv().TestShiny = tostring(self.isShiny)
     dogg = string.lower(self.PokemonName)
-    normal = "https://play.pokemonshowdown.com/sprites/xyani/"..dogg..".gif"
+    normal = "https://play.pokemonshowdown.com/sprites/ani/"..dogg..".gif"
     shinee = "https://play.pokemonshowdown.com/sprites/ani-shiny/"..dogg..".gif"
     if(self.isShiny) then do webhookdogg = shinee end
     else webhookdogg = normal   end
@@ -713,7 +698,7 @@ if syn and syn.protect_gui then
     syn.protect_gui(game:GetService("CoreGui"))
     syn.protect_gui(game:GetService("StarterGui"))
 end
-local Window = Library:CreateWindow('🎱 MewHub', "Fuck the Niggers 👌", "Welcome | "..game.Players.LocalPlayer.Name.."", "https://www.roblox.com/headshot-thumbnail/image?userId="..game.Players.LocalPlayer.UserId .."&width=420&height=420&format=png", false, 'VisualUIConfigs', 'Krnl')
+local Window = Library:CreateWindow('🎱 MewHub', "discord.gg/MewHub", "Welcome | "..game.Players.LocalPlayer.Name.."", "https://www.roblox.com/headshot-thumbnail/image?userId="..game.Players.LocalPlayer.UserId .."&width=420&height=420&format=png", false, 'VisualUIConfigs', 'Krnl')
 
 
 
@@ -1039,7 +1024,7 @@ for _, v in pairs(getgc(true)) do
         end
     end
 end
-    syn.secure_call(_p.Menu.party.open, localPlayer.PlayerScripts.ChatScript, _p.Menu.party)
+    _p.Menu.party:open()
 end)
 
 local Button = Section:CreateButton('.OpenPC 🖥️', function()
@@ -1052,9 +1037,7 @@ for _, v in pairs(getgc(true)) do
         end
     end
 end
-    syn.secure_call(_p.Menu.pc.bootUp, localPlayer.PlayerScripts.ChatScript, _p.Menu.pc)
-    _p.Menu:enable()
-    _p.MasterControl.WalkEnabled = true
+    _p.Menu.pc:bootUp()
 end)
 
 local Button = Section:CreateButton('.BeatAllGyms 🥇', function()
