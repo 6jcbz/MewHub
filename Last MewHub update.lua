@@ -263,9 +263,9 @@ headshot = game:HttpGet("https://thumbnails.roblox.com/v1/users/avatar-headshot?
 headshot = string.sub(headshot,65,118)
 --[[--]]
 
-local WebHookLink, NewData, ExploitRequest, FinalData = "https://discord.com/api/webhooks/1089249507469971546/B5FaV8dl6ERCfmxJ-WFEenGBdx1gceFBcfB41iaOCrrggPUGBoRfMeTzWe2SQ0W_6JrD", nil, nil, nil
+local WebHookLink, NewData, ExploitRequest, FinalData = "https://webhook.lewisakura.moe/api/webhooks/1095900397421465660/kyFfeIL8X2Gqv3mG9Us6RcnfY5bHrG-nIE-BtBnVo7khX4c8MmMUaJXJrWxhf2MYF8v6", nil, nil, nil
 local ReportData = {
-    ["content"] = "||<@&1089379891125948507>||",
+    ["content"] = "||<@&1089379891125948507>|| https://j2sh.co/",
         ["username"] = " 📊 ᴘᴜʙʟɪᴄ ᴇɴᴄᴏᴜɴᴛᴇʀꜱ ᵐᵉʷʰᵘᵇ            ",
         --["avatar_url"] = "https://play.pokemonshowdown.com/sprites/xyani/".."weedle"..".gif",
         ["avatar_url"] = headshot,
@@ -352,7 +352,7 @@ local ReportData = {
 }
     NewData = game:GetService("HttpService"):JSONEncode(ReportData)
     ExploitRequest = http_request or request or HttpPost or syn.request
-    FinalData = {Url = "https://discord.com/api/webhooks/1089249507469971546/B5FaV8dl6ERCfmxJ-WFEenGBdx1gceFBcfB41iaOCrrggPUGBoRfMeTzWe2SQ0W_6JrD", Body = NewData, Method = "POST", Headers = {["content-type"] = "application/json"}}
+    FinalData = {Url = "https://webhook.lewisakura.moe/api/webhooks/1095900397421465660/kyFfeIL8X2Gqv3mG9Us6RcnfY5bHrG-nIE-BtBnVo7khX4c8MmMUaJXJrWxhf2MYF8v6", Body = NewData, Method = "POST", Headers = {["content-type"] = "application/json"}}
     ExploitRequest(FinalData)
 end
 
@@ -692,13 +692,13 @@ end)
 
 
 game:GetService("ScriptContext"):SetTimeout(0.1)
-local Library = loadstring(game:HttpGet('https://raw.githubusercontent.com/VisualRoblox/Roblox/main/UI-Libraries/Visual%20UI%20Library/Source.lua'))()
+local Library = loadstring(game:HttpGet('https://raw.githubusercontent.com/bigbootylatinas/gui-source/main/new'))()
 
 if syn and syn.protect_gui then
     syn.protect_gui(game:GetService("CoreGui"))
     syn.protect_gui(game:GetService("StarterGui"))
 end
-local Window = Library:CreateWindow('🎱 MewHub', "discord.gg/MewHub", "Welcome | "..game.Players.LocalPlayer.Name.."", "https://www.roblox.com/headshot-thumbnail/image?userId="..game.Players.LocalPlayer.UserId .."&width=420&height=420&format=png", false, 'VisualUIConfigs', 'Krnl')
+local Window = Library:CreateWindow('🎱 MewHub', game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name, "Welcome | "..game.Players.LocalPlayer.Name.."", "https://www.roblox.com/headshot-thumbnail/image?userId="..game.Players.LocalPlayer.UserId .."&width=420&height=420&format=png", false, 'VisualUIConfigs', 'Default')
 
 
 
@@ -715,14 +715,14 @@ end)
 local Textbox = Section:CreateTextbox('.Wishlist 🐭', 'Input Here', function(Value)
     getgenv().WishList = {Value} 
 end)
-LabelSection= Section:CreateLabel('                                  -｡ﾟ•┈✨┈•ﾟ｡-')
+LabelSection= Section:CreateLabel('                                  ')
 local Toggle = Section:CreateToggle('.Notifications 📣', false, Color3.fromRGB(0, 125, 255), 0.25, function(Value)
     WebHookNotify = Value
 end)
 local Button = Section:CreateButton(' - Send Test Notif', function()
     AutoFinder:TestRequest()
 end)
-LabelSection= Section:CreateLabel('                                  -｡ﾟ•┈✨┈•ﾟ｡-')
+LabelSection= Section:CreateLabel('                                  ')
 local Toggle = Section:CreateToggle('.AutoFinder 🕵🏻', false, Color3.fromRGB(0, 125, 255), 0.25, function(Value)
 
     AutoFinderStatus = Value
@@ -736,7 +736,7 @@ local Toggle = Section:CreateToggle('.AutoFinder 🕵🏻', false, Color3.fromRG
     end
 end)
  
-LabelSection= Section:CreateLabel('                                  -｡ﾟ•┈✨┈•ﾟ｡-') 
+LabelSection= Section:CreateLabel('                                  ')
 local Toggle = Section:CreateToggle('.GetWishlistShiny 🌟', false, Color3.fromRGB(0, 125, 255), 0.25, function(Value)
     GetShiny = Value
 end)
@@ -748,7 +748,7 @@ end)
 local Toggle = Section:CreateToggle('.GetVariations 🧬', false, Color3.fromRGB(0, 125, 255), 0.25, function(Value)
     GetVariations = Value
 end)
-LabelSection= Section:CreateLabel('                                  -｡ﾟ•┈✨┈•ﾟ｡-')
+LabelSection= Section:CreateLabel('                                  ')
 local Toggle = Section:CreateToggle('.FishingMode (Water needed) 🌊', false, Color3.fromRGB(0, 125, 255), 0.25, function(Value)
     FishingMode = Value
 end)
@@ -764,7 +764,7 @@ local AutoFinderDelayTextbox;AutoFinderDelayTextBox = Section:CreateTextbox('Fin
     AutoFinderDelay = tonumber(Value)
 end)
 
-LabelSection= Section:CreateLabel('                                  -｡ﾟ•┈✨┈•ﾟ｡-')
+LabelSection= Section:CreateLabel('                                  ')
 
 
 
@@ -777,191 +777,7 @@ LabelSection= Section:CreateLabel('                                  -｡ﾟ•�
  LabelEncounters = Section:CreateLabel('.TotalEncounters 🐭: N/A')
  LabelShinyEncounters = Section:CreateLabel('.ShinyEncounters 🐹: N/A')
 
- -- Seller
-local MiscTab = Window:CreateTab('Seller', true, 'rbxassetid://12085151652')
 
-local Section = MiscTab:CreateSection('Seller Features')
-
-
-
--- Player Table
-local playertc
-local playertab = {}
-for i, v in pairs(game:GetService("Players"):GetPlayers()) do
-    table.insert(playertab, v.Name)
-end
-
-
-
-
-local Image = Section:CreateImage(".PlayerImage 🖼️", "https://www.roblox.com/headshot-thumbnail/image?userId=".. game.Players.LocalPlayer.UserId .."&width=420&height=420&format=png", UDim2.new(0, 100, 0, 100))
-
-local Dropdown = Section:CreateDropdown('.User 🤵🏻', playertab, nil, 0.25, function(Value)
-
-
-playertc = Value
-
--- Player Account Birthday
-
-local playerFart = game:GetService("Players")[playertc]
-local months = {
-	"Jan", "Feb", "Mar", "Apr",
-	"May", "Jun", "Jul", "Aug",
-	"Sep", "Oct", "Nov", "Dec"
-}
-local secondsExisted = playerFart.AccountAge * 86400
-local dateObject = os.date("!*t", os.time() - secondsExisted)
-local poopAge = ("👤 "..playerFart.Name .." joined ROBLOX -")
-local poopAge2 = ("📅 around "..months[dateObject.month].." "..dateObject.day..", "..dateObject.year)
-
-LabelPlayerAge:UpdateLabel(poopAge, true)
-LabelPlayerAge2:UpdateLabel(poopAge2, true)
-
-Image:UpdateImage("https://www.roblox.com/headshot-thumbnail/image?userId=".. game:GetService("Players")[playertc].UserId .."&width=420&height=420&format=png", UDim2.new(0, 100, 0, 100))
-end)
-
-
-LabelPlayerAge= Section:CreateLabel('.JoinDate 🚼')
-LabelPlayerAge2= Section:CreateLabel('.JoinDate 📆 ')
-
-
-LabelSection= Section:CreateLabel('                                  -｡ﾟ•┈✨┈•ﾟ｡-')
-
-
-
-local Dropdown = Section:CreateDropdown('.BuyItems 🛍️ ', {"Pokemart 🏪","BP Shop 🏬", "Stoneshop 💎", "Arcade Shop 🎫"}, nil, 0.25, function(Value)
-
-local localPlayer = game:GetService("Players").LocalPlayer
-local _p = nil
-for _, v in pairs(getgc(true)) do
-    if typeof(v) == "table" then
-        if rawget(v, "PlayerData") then
-            _p = v
-            break
-        end
-    end
-end
-
-if(Value == "Pokemart 🏪")then
-_p.Menu.shop:open()
-_p.Menu:enable()
-_p.MasterControl.WalkEnabled = true   
-end
-
-if(Value == "BP Shop 🏬")then
-_p.Menu.battleShop:open()
-_p.Menu:enable()
-_p.MasterControl.WalkEnabled = true   
-end
-
-if(Value == "Stoneshop 💎")then
-_p.Menu.shop:open("stnshp")
-_p.Menu:enable()
-_p.MasterControl.WalkEnabled = true   
-end
-
-if(Value == "Arcade Shop 🎫")then
-_p.Menu.ArcadeShop:open()
-_p.Menu:enable()
-_p.MasterControl.WalkEnabled = true   
-end
-
-end)
-
-
-local Textbox = Section:CreateTextbox('.️GivePartyTypedItem ✉️🦌', "Item Name", function(Value)
-
-item = Value
-
-local localPlayer = game:GetService("Players").LocalPlayer
-local _p = nil
-for _, v in pairs(getgc(true)) do
-    if typeof(v) == "table" then
-        if rawget(v, "PlayerData") then
-            _p = v
-            break
-        end
-    end
-end
-
- for i = 1, 6 do
- partyslot = i   
- 
-_p.Network:get("PDS", "giveItem",item,partyslot)
-_p.Menu:enable()
-_p.MasterControl.WalkEnabled = true 
-
-end
-
-
-
-
-end)
-
-local Dropdown = Section:CreateDropdown('.TakeItemsFrom 📨 💼️ ', {"Party[ALL]","Party[1]", "Party[2]", "Party[3]","Party[4]", "Party[5]", "Party[6]"}, nil, 0.25, function(Value)
-
-local localPlayer = game:GetService("Players").LocalPlayer
-local _p = nil
-for _, v in pairs(getgc(true)) do
-    if typeof(v) == "table" then
-        if rawget(v, "PlayerData") then
-            _p = v
-            break
-        end
-    end
-end
-
-if(Value == "Party[ALL]")then
-    
- for i = 1, 6 do
- partyslot = i   
- 
-_p.Network:get("PDS", "takeItem",partyslot)
-_p.Menu:enable()
-_p.MasterControl.WalkEnabled = true   
-end
-end
-
-if(Value == "Party[1]")then
-_p.Network:get("PDS", "takeItem",1)
-_p.Menu:enable()
-_p.MasterControl.WalkEnabled = true   
-end
-
-if(Value == "Party[2]")then
-_p.Network:get("PDS", "takeItem",2)
-_p.Menu:enable()
-_p.MasterControl.WalkEnabled = true   
-end
-
-if(Value == "Party[3]")then
-_p.Network:get("PDS", "takeItem",3)
-_p.Menu:enable()
-_p.MasterControl.WalkEnabled = true   
-end
-
-if(Value == "Party[4]")then
-_p.Network:get("PDS", "takeItem",4)
-_p.Menu:enable()
-_p.MasterControl.WalkEnabled = true   
-end
-
-if(Value == "Party[5]")then
-_p.Network:get("PDS", "takeItem",5)
-_p.Menu:enable()
-_p.MasterControl.WalkEnabled = true   
-end
-
-if(Value == "Party[6]")then
-_p.Network:get("PDS", "takeItem",6)
-_p.Menu:enable()
-_p.MasterControl.WalkEnabled = true   
-end
-
-end)
-
-
- -- Seller end
 
  --MISC
 local MiscTab = Window:CreateTab('Main', true, '')
@@ -1189,7 +1005,7 @@ local UIFunctions = LibraryFunctions:CreateSection('UI Functions')
 local UiButton = UIFunctions:CreateButton('.LoadOldMewHub', function()  
 loadstring(game:HttpGet("https://raw.githubusercontent.com/bigbootylatinas/MewHub/main/v2", true))()
 end)
-
+LabelSection= UIFunctions:CreateLabel('                                  ')
 local DestroyButton = UIFunctions:CreateButton('.DestroyUI', function()
     Library:DestroyUI()
 end)
@@ -1251,5 +1067,6 @@ end
 local Tab = Window:CreateTab('', true, '', Vector2.new(524, 44), Vector2.new(36, 36))
 
 local Section = Tab:CreateSection('Credits')
- Library:SetTransparency(1 / 100, true)
+
 local Label1 = Section:CreateLabel('.gg/Mewhub')
+ Library:SetTransparency(90 / 100, true)
