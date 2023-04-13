@@ -13,12 +13,6 @@ getgenv().Rod = "GoodRod"
 getgenv().Test = "nil" -- for webhook pokemon
 getgenv().TestShiny = "nil" -- for webhook
 
-
-local VirtualUser = game:service'VirtualUser'
-game:service'Players'.LocalPlayer.Idled:connect(function()
-    VirtualUser:CaptureController()
-    VirtualUser:ClickButton2(Vector2.new())
-end)
 --[[--]] -- PBB Variables
 local LocalPlayer = game:GetService("Players").LocalPlayer
 local oldIndex = nil
@@ -1011,7 +1005,7 @@ local UIFunctions = LibraryFunctions:CreateSection('UI Functions')
 local UiButton = UIFunctions:CreateButton('.LoadOldMewHub', function()  
 loadstring(game:HttpGet("https://raw.githubusercontent.com/bigbootylatinas/MewHub/main/v2", true))()
 end)
-LabelSection= UIFunctions:CreateLabel('                                  ')
+
 local DestroyButton = UIFunctions:CreateButton('.DestroyUI', function()
     Library:DestroyUI()
 end)
